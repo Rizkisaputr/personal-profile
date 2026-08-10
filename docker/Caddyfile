@@ -1,0 +1,15 @@
+{
+    auto_https off
+    admin off
+}
+
+:8080 {
+    root * /var/www/html/public
+    encode zstd gzip
+
+    @hidden path_regexp hidden (^|/)\.
+    respond @hidden 404
+
+    php_server
+}
+
