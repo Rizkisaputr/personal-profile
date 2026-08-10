@@ -2,17 +2,53 @@ services:
   app:
     build:
       context: .
-      target: runtime
+      dockerfile: Dockerfile
+    container_name: personal-profile-app
     restart: unless-stopped
-    init: true
+
+    # Aplikasi hanya dapat diakses Nginx dari VPS yang sama
+    ports:
+      - "127.0.0.1:${APP_PORT:-8081}:8080"
+
     env_file:
       - .env
-    ports:
-      - "127.0.0.1:8081:8080"
+
+    # Database production menggunakan TiDB Cloud
+    environment:
+      TZ: ${TZ:-Asia/Jakarta}
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      DB_CONNECTION: ${DB_CONNECTION:-mysql}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-4000}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ATTR_SSL_CA: ${MYSQL_ATTR_SSL_CA:-/etc/ssl/certs/ca-certificates.crt}
+
+    # Storage Laravel dibuat persistent agar upload tidak hilang saat rebuild
     volumes:
-      - app-storage:/var/www/html/storage
-    stop_grace_period: 30s
+      - personal-profile-storage:/var/www/html/storage
+
+    networks:
+      - personal-profile-network
+
+    healthcheck:
+      test:
+        - CMD
+        - php
+        - -r
+        - "exit(@file_get_contents('http://127.0.0.1:8080/up') === false ? 1 : 0);"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
 
 volumes:
-  app-storage:
+  personal-profile-storage:
+    name: personal-profile-storage
 
+networks:
+  personal-profile-network:
+    name: personal-profile-network
+    driver: bridge
