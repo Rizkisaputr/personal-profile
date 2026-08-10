@@ -18,6 +18,7 @@ services:
       TZ: ${TZ:-Asia/Jakarta}
       APP_ENV: ${APP_ENV:-production}
       APP_DEBUG: ${APP_DEBUG:-false}
+      SERVER_NAME: ":80"
       DB_CONNECTION: ${DB_CONNECTION:-mysql}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT:-4000}
