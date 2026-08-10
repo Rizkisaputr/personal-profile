@@ -3,7 +3,7 @@
     admin off
 }
 
-:8080 {
+:80 {
     root * /var/www/html/public
     encode zstd gzip
 
@@ -12,4 +12,3 @@
 
     php_server
 }
-

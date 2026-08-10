@@ -1,6 +1,6 @@
 # Production deployment with Docker Compose
 
-This deployment runs Laravel in one application container using PHP 8.3 and FrankenPHP. The container listens on port `8080`; Compose binds it only to `127.0.0.1:${APP_PORT:-8081}` on the VPS. Set `APP_PORT=8081` in the server `.env`. The host Nginx configuration is intentionally outside this repository.
+This deployment runs Laravel in one application container using PHP 8.3 and FrankenPHP. FrankenPHP/Caddy listens for HTTP on container port `80`; Compose binds it to host `127.0.0.1:${APP_PORT:-8081}` (port `8081` by default) on the VPS. Set `APP_PORT=8081` in the server `.env`. The host Nginx configuration is intentionally outside this repository.
 
 The Compose stack does not include a database, queue worker, or scheduler. Production uses the external TiDB Cloud database configured through the server `.env`. `DB_HOST` must be the TiDB Cloud endpoint reachable from inside Docker; never commit that endpoint or any credential.
 
