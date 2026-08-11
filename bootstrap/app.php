@@ -14,18 +14,20 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias([
-            'admin' => AdminMiddleware::class,
-        ]);
+        ->withMiddleware(function (Middleware $middleware): void {
+            $middleware->trustProxies(at: '*');
 
-        $middleware->encryptCookies(except: ['sidebar_state']);
+            $middleware->alias([
+                'admin' => AdminMiddleware::class,
+            ]);
 
-        $middleware->web(append: [
-            HandleInertiaRequests::class,
-            AddLinkHeadersForPreloadedAssets::class,
-        ]);
-    })
+            $middleware->encryptCookies(except: ['sidebar_state']);
+
+            $middleware->web(append: [
+                HandleInertiaRequests::class,
+                AddLinkHeadersForPreloadedAssets::class,
+            ]);
+        })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
