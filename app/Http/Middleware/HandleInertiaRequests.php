@@ -68,6 +68,11 @@ class HandleInertiaRequests extends Middleware
                     : null,
             ] : null,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'locale' => $request->is('admin/*') || $request->is('admin') ? app()->getLocale() : null,
+            'availableLocales' => $request->is('admin/*') || $request->is('admin') ? [
+                ['code' => 'en', 'name' => 'English'],
+                ['code' => 'id', 'name' => 'Bahasa Indonesia'],
+            ] : [],
         ];
     }
 }

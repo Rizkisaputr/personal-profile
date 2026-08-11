@@ -20,6 +20,8 @@ declare module '@inertiajs/core' {
             auth: Auth;
             profileIdentity: ProfileIdentity | null;
             sidebarOpen: boolean;
+            locale: 'en' | 'id' | null;
+            availableLocales: Array<{ code: 'en' | 'id'; name: string }>;
             [key: string]: unknown;
         };
     }

@@ -10,7 +10,7 @@ class FinanceCategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'income' => ['Salary', 'Project', 'Business', 'Bonus', 'Other'],
+            'income' => ['Salary', 'Bonus', 'Investment', 'Project', 'Business', 'Other'],
             'expense' => ['Food', 'Transport', 'Shopping', 'Bills', 'Subscription', 'Entertainment', 'Education', 'Health', 'Debt Payment', 'Other'],
         ];
 

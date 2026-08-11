@@ -6,7 +6,11 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import PublicLayout from '@/layouts/public/PublicLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { initializeFlashToast } from '@/lib/flashToast';
-import { initializeUiLocalization, translateUi } from '@/lib/uiLocalization';
+import {
+    initializeUiLocalization,
+    setUiLocale,
+    translateUi,
+} from '@/lib/uiLocalization';
 
 const appName = 'Rizki Saputra';
 
@@ -22,7 +26,9 @@ createInertiaApp({
             ? pageTitle
             : `${pageTitle} | ${appName}`;
     },
-    layout: (name) => {
+    layout: (name, page) => {
+        setUiLocale(page.props.locale);
+
         switch (true) {
             case name === 'auth/Login':
                 return LoginLayout;

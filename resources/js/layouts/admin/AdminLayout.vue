@@ -16,6 +16,7 @@ import {
     HandCoins,
     Landmark,
     LayoutDashboard,
+    Languages,
     LogOut,
     Menu,
     Package,
@@ -24,6 +25,7 @@ import {
     Settings,
     Share2,
     Sparkles,
+    Tags,
     UserRound,
     Wallet,
     X,
@@ -129,6 +131,7 @@ const financeNavigation = [
         icon: ArrowLeftRight,
     },
     { label: 'Accounts', href: '/admin/finance/accounts', icon: Landmark },
+    { label: 'Categories', href: '/admin/finance/categories', icon: Tags },
     {
         label: 'Debts & Receivables',
         href: '/admin/finance/debts',
@@ -174,6 +177,12 @@ function accountName(): string {
 
 function handleLogout(): void {
     router.flushAll();
+}
+
+function changeLanguage(event: Event): void {
+    const locale = (event.target as HTMLSelectElement).value;
+
+    router.post('/admin/language', { locale }, { preserveScroll: true });
 }
 </script>
 
@@ -338,66 +347,97 @@ function handleLogout(): void {
                             <Menu class="size-5" />
                         </Button>
                     </div>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger as-child>
-                            <button
-                                type="button"
-                                class="flex max-w-[13rem] items-center gap-2.5 rounded-lg p-1.5 text-sm font-medium transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
-                                aria-label="Open account menu"
-                            >
-                                <ProfileAvatar
-                                    class="size-9 shrink-0 text-[0.65rem]"
-                                    :name="accountName()"
-                                    :image-url="
-                                        page.props.profileIdentity?.image_url
-                                    "
-                                    :alt="`Profile photo for ${accountName()}`"
-                                />
-                                <span
-                                    class="hidden min-w-0 truncate sm:block"
-                                    >{{ accountName() }}</span
-                                >
-                                <ChevronDown
-                                    class="hidden size-4 shrink-0 text-muted-foreground sm:block"
-                                />
-                            </button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            align="end"
-                            class="w-48 rounded-xl p-1.5 shadow-lg"
+                    <div class="flex items-center gap-2">
+                        <label
+                            class="relative flex items-center text-muted-foreground"
+                            aria-label="Language"
                         >
-                            <DropdownMenuItem as-child>
-                                <Link
-                                    href="/admin/profile"
-                                    class="flex w-full cursor-pointer items-center gap-2.5"
+                            <Languages
+                                class="pointer-events-none absolute left-2.5 size-4"
+                            />
+                            <select
+                                :value="page.props.locale ?? 'en'"
+                                class="h-9 cursor-pointer appearance-none rounded-lg border border-border bg-background py-1 pr-7 pl-8 text-xs font-semibold text-foreground transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+                                aria-label="Language"
+                                @change="changeLanguage"
+                            >
+                                <option
+                                    v-for="locale in page.props
+                                        .availableLocales"
+                                    :key="locale.code"
+                                    :value="locale.code"
                                 >
-                                    <UserRound class="size-4" />Profile
-                                </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem as-child>
-                                <a
-                                    href="/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="flex w-full cursor-pointer items-center gap-2.5"
+                                    {{ locale.code.toUpperCase() }}
+                                </option>
+                            </select>
+                            <ChevronDown
+                                class="pointer-events-none absolute right-2 size-3"
+                            />
+                        </label>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger as-child>
+                                <button
+                                    type="button"
+                                    class="flex max-w-[13rem] items-center gap-2.5 rounded-lg p-1.5 text-sm font-medium transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+                                    aria-label="Open account menu"
                                 >
-                                    <ExternalLink class="size-4" />View Website
-                                </a>
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem as-child>
-                                <Link
-                                    :href="logout()"
-                                    as="button"
-                                    class="flex w-full cursor-pointer items-center gap-2.5 text-destructive"
-                                    data-test="logout-button"
-                                    @click="handleLogout"
-                                >
-                                    <LogOut class="size-4" />Log Out
-                                </Link>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                    <ProfileAvatar
+                                        class="size-9 shrink-0 text-[0.65rem]"
+                                        :name="accountName()"
+                                        :image-url="
+                                            page.props.profileIdentity
+                                                ?.image_url
+                                        "
+                                        :alt="`Profile photo for ${accountName()}`"
+                                    />
+                                    <span
+                                        data-no-translate
+                                        class="hidden min-w-0 truncate sm:block"
+                                        >{{ accountName() }}</span
+                                    >
+                                    <ChevronDown
+                                        class="hidden size-4 shrink-0 text-muted-foreground sm:block"
+                                    />
+                                </button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                                align="end"
+                                class="w-48 rounded-xl p-1.5 shadow-lg"
+                            >
+                                <DropdownMenuItem as-child>
+                                    <Link
+                                        href="/admin/profile"
+                                        class="flex w-full cursor-pointer items-center gap-2.5"
+                                    >
+                                        <UserRound class="size-4" />Profile
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem as-child>
+                                    <a
+                                        href="/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="flex w-full cursor-pointer items-center gap-2.5"
+                                    >
+                                        <ExternalLink class="size-4" />View
+                                        Website
+                                    </a>
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem as-child>
+                                    <Link
+                                        :href="logout()"
+                                        as="button"
+                                        class="flex w-full cursor-pointer items-center gap-2.5 text-destructive"
+                                        data-test="logout-button"
+                                        @click="handleLogout"
+                                    >
+                                        <LogOut class="size-4" />Log Out
+                                    </Link>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </div>
             </header>
 

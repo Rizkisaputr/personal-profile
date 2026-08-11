@@ -8,10 +8,12 @@ use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\FinanceAccountController;
 use App\Http\Controllers\Admin\FinanceBillController;
+use App\Http\Controllers\Admin\FinanceCategoryController;
 use App\Http\Controllers\Admin\FinanceDebtController;
 use App\Http\Controllers\Admin\FinanceOverviewController;
 use App\Http\Controllers\Admin\FinanceSavingsController;
 use App\Http\Controllers\Admin\FinanceTransactionController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
@@ -29,6 +31,7 @@ Route::get('/projects', [SiteProjectController::class, 'index'])->name('projects
 Route::get('/projects/{project:slug}', [SiteProjectController::class, 'show'])->name('projects.show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::post('language', LanguageController::class)->name('admin.language.update');
     Route::get('/', DashboardController::class)->name('admin.index');
     Route::get('profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::match(['put', 'patch'], 'profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
@@ -45,6 +48,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('finance/accounts/{account}/adjust', [FinanceAccountController::class, 'adjust'])->name('admin.finance.accounts.adjust');
     Route::post('finance/accounts/{account}/adjust', [FinanceAccountController::class, 'storeAdjustment'])->name('admin.finance.accounts.adjust.store');
     Route::resource('finance/accounts', FinanceAccountController::class)->except('show')->names('admin.finance.accounts');
+    Route::resource('finance/categories', FinanceCategoryController::class)->except('show')->names('admin.finance.categories');
     Route::resource('finance/transactions', FinanceTransactionController::class)->except('show')->names('admin.finance.transactions');
     Route::post('finance/debts/{debt}/schedules', [FinanceDebtController::class, 'schedule'])->name('admin.finance.debts.schedules.store');
     Route::post('finance/debts/{debt}/payments', [FinanceDebtController::class, 'pay'])->name('admin.finance.debts.pay');

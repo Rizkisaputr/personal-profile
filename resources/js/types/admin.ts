@@ -157,7 +157,9 @@ export type FinanceCategory = {
     id: number;
     name: string;
     type: 'income' | 'expense';
-    is_active?: boolean;
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
 };
 export type FinanceTransaction = {
     id: number;

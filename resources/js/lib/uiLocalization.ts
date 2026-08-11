@@ -281,8 +281,10 @@ const translations: Record<string, string> = {
     'Live Project': 'Lihat Proyek',
     'Project navigation': 'Navigasi proyek',
     'Filter projects by category': 'Filter proyek berdasarkan kategori',
-    'Projects shaped by real constraints.': 'Proyek yang dibangun dari kebutuhan nyata.',
-    'There are no projects in this category yet.': 'Belum ada proyek dalam kategori ini.',
+    'Projects shaped by real constraints.':
+        'Proyek yang dibangun dari kebutuhan nyata.',
+    'There are no projects in this category yet.':
+        'Belum ada proyek dalam kategori ini.',
     'Goal name': 'Nama target',
     'Bill name': 'Nama tagihan',
     'Account name': 'Nama Rekening',
@@ -310,12 +312,14 @@ const translations: Record<string, string> = {
     'Save account': 'Simpan Rekening',
     'Create adjustment': 'Simpan Penyesuaian',
     'Current system balance': 'Saldo Sistem Saat Ini',
-    'Initial ledger balance. Current balance cannot be edited directly.': 'Saldo awal pencatatan. Saldo saat ini tidak dapat diedit langsung.',
-    'Inactive accounts remain available in transaction history.': 'Rekening tidak aktif tetap tersedia dalam riwayat transaksi.',
+    'Initial ledger balance. Current balance cannot be edited directly.':
+        'Saldo awal pencatatan. Saldo saat ini tidak dapat diedit langsung.',
+    'Inactive accounts remain available in transaction history.':
+        'Rekening tidak aktif tetap tersedia dalam riwayat transaksi.',
     'No finance accounts': 'Belum ada rekening',
     'No savings goals.': 'Belum ada target tabungan.',
     'No payments yet.': 'Belum ada riwayat pembayaran.',
-    'Uncategorized': 'Tanpa Kategori',
+    Uncategorized: 'Tanpa Kategori',
     'Default account': 'Rekening Default',
     'Custom interval days': 'Interval kustom (hari)',
     'Due day': 'Tanggal jatuh tempo',
@@ -364,7 +368,8 @@ const translations: Record<string, string> = {
     'Finance account created.': 'Rekening berhasil ditambahkan.',
     'Finance account updated.': 'Rekening berhasil diperbarui.',
     'Finance account deleted.': 'Rekening berhasil dihapus.',
-    'Account deactivated because it has transaction history.': 'Rekening dinonaktifkan karena memiliki riwayat transaksi.',
+    'Account deactivated because it has transaction history.':
+        'Rekening dinonaktifkan karena memiliki riwayat transaksi.',
     'Account balance adjusted.': 'Saldo rekening berhasil disesuaikan.',
     'Transaction recorded.': 'Transaksi berhasil ditambahkan.',
     'Transaction updated.': 'Transaksi berhasil diperbarui.',
@@ -398,41 +403,70 @@ const translations: Record<string, string> = {
     'Website settings updated.': 'Pengaturan website berhasil diperbarui.',
     'Password updated.': 'Kata sandi berhasil diperbarui.',
     'Profile updated.': 'Profil berhasil diperbarui.',
-    'Ensure your account is using a long, random password to stay secure': 'Gunakan kata sandi panjang dan acak agar akun tetap aman.',
-    'Update your name and email address': 'Perbarui nama dan alamat email Anda.',
-    'Manage your profile and account settings': 'Kelola profil dan pengaturan akun Anda.',
-    'Manage your two-factor authentication settings': 'Kelola pengaturan autentikasi dua faktor.',
-    'Manage your passkeys for passwordless sign-in': 'Kelola passkey untuk masuk tanpa kata sandi.',
-    'Delete your account and all of its resources': 'Hapus akun dan seluruh data yang terkait.',
-    'Review and filter your private manual transaction ledger.': 'Tinjau dan filter catatan transaksi pribadi Anda.',
-    'Record income, expense, transfer, or a balance adjustment manually.': 'Catat pemasukan, pengeluaran, transfer, atau penyesuaian saldo secara manual.',
-    'Manage the accounts that make up your private finance ledger.': 'Kelola rekening yang digunakan dalam pencatatan keuangan pribadi.',
-    'Add an account before recording transactions.': 'Tambahkan rekening sebelum mencatat transaksi.',
-    'Update account metadata and opening balance.': 'Perbarui informasi rekening dan saldo awal.',
-    'Create a manually managed account for your private finance ledger.': 'Tambahkan rekening yang dikelola manual untuk pencatatan keuangan pribadi.',
-    'Record a ledger adjustment to match the actual account balance.': 'Catat penyesuaian agar saldo sistem sesuai dengan saldo aktual.',
-    'Track obligations and money owed to you.': 'Pantau hutang dan piutang Anda.',
-    'Track an amount owed with history-derived progress.': 'Pantau nilai hutang atau piutang beserta progres pembayarannya.',
-    'Goals, monthly targets, contributions, and withdrawals.': 'Kelola target, tabungan, dan pengambilan dana.',
-    'Set an overall target without automatic monthly carry-over.': 'Tentukan target keseluruhan tanpa pemindahan kekurangan bulanan otomatis.',
-    'History-derived savings progress with independent monthly targets.': 'Pantau progres tabungan dan target bulanan secara terpisah.',
-    'Track upcoming manually paid recurring expenses.': 'Pantau tagihan rutin yang dibayar secara manual.',
-    'Configure a manually paid recurring obligation.': 'Atur tagihan rutin yang dibayar secara manual.',
-    'Recurring services with finance-ledger payment history.': 'Kelola layanan berlangganan beserta riwayat pembayarannya.',
-    'Track recurring services and manual payments.': 'Pantau layanan rutin dan pembayaran manual.',
-    'Private files available only to authenticated administrators.': 'Berkas privat yang hanya tersedia bagi administrator.',
-    'Private document metadata and file storage.': 'Kelola informasi dan penyimpanan berkas privat.',
-    'A compact inventory of personal property and equipment.': 'Inventaris ringkas aset dan perlengkapan pribadi.',
-    'Simple personal asset inventory without depreciation accounting.': 'Inventaris aset pribadi tanpa perhitungan penyusutan.',
+    'Ensure your account is using a long, random password to stay secure':
+        'Gunakan kata sandi panjang dan acak agar akun tetap aman.',
+    'Update your name and email address':
+        'Perbarui nama dan alamat email Anda.',
+    'Manage your profile and account settings':
+        'Kelola profil dan pengaturan akun Anda.',
+    'Manage your two-factor authentication settings':
+        'Kelola pengaturan autentikasi dua faktor.',
+    'Manage your passkeys for passwordless sign-in':
+        'Kelola passkey untuk masuk tanpa kata sandi.',
+    'Delete your account and all of its resources':
+        'Hapus akun dan seluruh data yang terkait.',
+    'Review and filter your private manual transaction ledger.':
+        'Tinjau dan filter catatan transaksi pribadi Anda.',
+    'Record income, expense, transfer, or a balance adjustment manually.':
+        'Catat pemasukan, pengeluaran, transfer, atau penyesuaian saldo secara manual.',
+    'Manage the accounts that make up your private finance ledger.':
+        'Kelola rekening yang digunakan dalam pencatatan keuangan pribadi.',
+    'Add an account before recording transactions.':
+        'Tambahkan rekening sebelum mencatat transaksi.',
+    'Update account metadata and opening balance.':
+        'Perbarui informasi rekening dan saldo awal.',
+    'Create a manually managed account for your private finance ledger.':
+        'Tambahkan rekening yang dikelola manual untuk pencatatan keuangan pribadi.',
+    'Record a ledger adjustment to match the actual account balance.':
+        'Catat penyesuaian agar saldo sistem sesuai dengan saldo aktual.',
+    'Track obligations and money owed to you.':
+        'Pantau hutang dan piutang Anda.',
+    'Track an amount owed with history-derived progress.':
+        'Pantau nilai hutang atau piutang beserta progres pembayarannya.',
+    'Goals, monthly targets, contributions, and withdrawals.':
+        'Kelola target, tabungan, dan pengambilan dana.',
+    'Set an overall target without automatic monthly carry-over.':
+        'Tentukan target keseluruhan tanpa pemindahan kekurangan bulanan otomatis.',
+    'History-derived savings progress with independent monthly targets.':
+        'Pantau progres tabungan dan target bulanan secara terpisah.',
+    'Track upcoming manually paid recurring expenses.':
+        'Pantau tagihan rutin yang dibayar secara manual.',
+    'Configure a manually paid recurring obligation.':
+        'Atur tagihan rutin yang dibayar secara manual.',
+    'Recurring services with finance-ledger payment history.':
+        'Kelola layanan berlangganan beserta riwayat pembayarannya.',
+    'Track recurring services and manual payments.':
+        'Pantau layanan rutin dan pembayaran manual.',
+    'Private files available only to authenticated administrators.':
+        'Berkas privat yang hanya tersedia bagi administrator.',
+    'Private document metadata and file storage.':
+        'Kelola informasi dan penyimpanan berkas privat.',
+    'A compact inventory of personal property and equipment.':
+        'Inventaris ringkas aset dan perlengkapan pribadi.',
+    'Simple personal asset inventory without depreciation accounting.':
+        'Inventaris aset pribadi tanpa perhitungan penyusutan.',
     'Forgot password': 'Lupa Kata Sandi',
-    'Enter your email to receive a password reset link': 'Masukkan email Anda untuk menerima tautan pengaturan ulang kata sandi.',
+    'Enter your email to receive a password reset link':
+        'Masukkan email Anda untuk menerima tautan pengaturan ulang kata sandi.',
     'Email password reset link': 'Kirim Tautan Atur Ulang Kata Sandi',
     'Or, return to': 'Atau, kembali ke',
     'Welcome back, Rizki Saputra': 'Selamat datang kembali, Rizki Saputra',
-    'Sign in to manage your profile and portfolio.': 'Masuk untuk mengelola profil dan portofolio Anda.',
+    'Sign in to manage your profile and portfolio.':
+        'Masuk untuk mengelola profil dan portofolio Anda.',
     Register: 'Daftar',
     'Create an account': 'Buat Akun',
-    'Enter your details below to create your account': 'Masukkan data Anda untuk membuat akun.',
+    'Enter your details below to create your account':
+        'Masukkan data Anda untuk membuat akun.',
     'Full name': 'Nama lengkap',
     'Create account': 'Buat Akun',
     'Already have an account?': 'Sudah memiliki akun?',
@@ -441,18 +475,23 @@ const translations: Record<string, string> = {
     'Confirm with passkey': 'Konfirmasi dengan passkey',
     'Confirming...': 'Mengonfirmasi...',
     'Or confirm with password': 'Atau konfirmasi dengan kata sandi',
-    'This is a secure area of the application. Please confirm your password before continuing.': 'Ini adalah area aman. Konfirmasikan kata sandi Anda sebelum melanjutkan.',
+    'This is a secure area of the application. Please confirm your password before continuing.':
+        'Ini adalah area aman. Konfirmasikan kata sandi Anda sebelum melanjutkan.',
     'Recovery code': 'Kode Pemulihan',
     'Authentication code': 'Kode Autentikasi',
     'Enter recovery code': 'Masukkan kode pemulihan',
-    'Please confirm access to your account by entering one of your emergency recovery codes.': 'Konfirmasikan akses akun dengan memasukkan salah satu kode pemulihan darurat.',
-    'Enter the authentication code provided by your authenticator application.': 'Masukkan kode autentikasi dari aplikasi autentikator Anda.',
+    'Please confirm access to your account by entering one of your emergency recovery codes.':
+        'Konfirmasikan akses akun dengan memasukkan salah satu kode pemulihan darurat.',
+    'Enter the authentication code provided by your authenticator application.':
+        'Masukkan kode autentikasi dari aplikasi autentikator Anda.',
     'login using an authentication code': 'masuk menggunakan kode autentikasi',
     'login using a recovery code': 'masuk menggunakan kode pemulihan',
     'or you can': 'atau Anda dapat',
     'Email verification': 'Verifikasi Email',
-    'Please verify your email address by clicking on the link we just emailed to you.': 'Verifikasikan alamat email dengan mengeklik tautan yang baru kami kirim.',
-    'A new verification link has been sent to the email address you provided during registration.': 'Tautan verifikasi baru telah dikirim ke alamat email yang Anda daftarkan.',
+    'Please verify your email address by clicking on the link we just emailed to you.':
+        'Verifikasikan alamat email dengan mengeklik tautan yang baru kami kirim.',
+    'A new verification link has been sent to the email address you provided during registration.':
+        'Tautan verifikasi baru telah dikirim ke alamat email yang Anda daftarkan.',
     'Resend verification email': 'Kirim Ulang Email Verifikasi',
     'Log out': 'Keluar',
     Continue: 'Lanjutkan',
@@ -506,18 +545,30 @@ const translations: Record<string, string> = {
     'Save project': 'Simpan Proyek',
     'Save certificate': 'Simpan Sertifikat',
     'Save social link': 'Simpan Media Sosial',
-    'A concise summary of the learning experience.': 'Ringkasan singkat mengenai pengalaman belajar.',
-    'Active training entries can appear on the public website.': 'Pelatihan aktif dapat ditampilkan pada website publik.',
-    'Leave blank on create to generate automatically.': 'Kosongkan saat menambah agar dibuat otomatis.',
-    'Not required for a current position.': 'Tidak wajib untuk posisi saat ini.',
-    'Leave the end date empty while this role is ongoing.': 'Kosongkan tanggal selesai selama posisi masih berlangsung.',
-    'Active experiences can be displayed on the public website.': 'Pengalaman aktif dapat ditampilkan pada website publik.',
-    'The primary identity and summary shown in project listings.': 'Identitas dan ringkasan utama yang ditampilkan pada daftar proyek.',
-    'Leave blank on create to generate it from the title.': 'Kosongkan saat menambah agar dibuat otomatis dari judul.',
-    'Create technologies first to connect them to this project.': 'Tambahkan teknologi terlebih dahulu untuk menghubungkannya ke proyek ini.',
-    'Control prominence, visibility, and search presentation.': 'Atur prioritas, visibilitas, dan tampilan pencarian.',
-    'Published projects are eligible for the public portfolio.': 'Proyek yang dipublikasikan dapat ditampilkan pada portofolio publik.',
-    'Highlight this project among selected work.': 'Tampilkan proyek ini sebagai proyek unggulan.',
+    'A concise summary of the learning experience.':
+        'Ringkasan singkat mengenai pengalaman belajar.',
+    'Active training entries can appear on the public website.':
+        'Pelatihan aktif dapat ditampilkan pada website publik.',
+    'Leave blank on create to generate automatically.':
+        'Kosongkan saat menambah agar dibuat otomatis.',
+    'Not required for a current position.':
+        'Tidak wajib untuk posisi saat ini.',
+    'Leave the end date empty while this role is ongoing.':
+        'Kosongkan tanggal selesai selama posisi masih berlangsung.',
+    'Active experiences can be displayed on the public website.':
+        'Pengalaman aktif dapat ditampilkan pada website publik.',
+    'The primary identity and summary shown in project listings.':
+        'Identitas dan ringkasan utama yang ditampilkan pada daftar proyek.',
+    'Leave blank on create to generate it from the title.':
+        'Kosongkan saat menambah agar dibuat otomatis dari judul.',
+    'Create technologies first to connect them to this project.':
+        'Tambahkan teknologi terlebih dahulu untuk menghubungkannya ke proyek ini.',
+    'Control prominence, visibility, and search presentation.':
+        'Atur prioritas, visibilitas, dan tampilan pencarian.',
+    'Published projects are eligible for the public portfolio.':
+        'Proyek yang dipublikasikan dapat ditampilkan pada portofolio publik.',
+    'Highlight this project among selected work.':
+        'Tampilkan proyek ini sebagai proyek unggulan.',
     'Email address': 'Alamat Email',
     'Personal profile': 'Profil Pribadi',
     'Professional title': 'Profesi',
@@ -540,7 +591,8 @@ const translations: Record<string, string> = {
     'Footer text': 'Teks Footer',
     'Program name': 'Nama Program',
     'Credential URL': 'URL Kredensial',
-    'Training provider or institution': 'Penyelenggara atau institusi pelatihan',
+    'Training provider or institution':
+        'Penyelenggara atau institusi pelatihan',
     'Program, course, or workshop': 'Nama program, kursus, atau lokakarya',
     'Subject or specialization': 'Subjek atau spesialisasi',
     'City, country, or online': 'Kota, negara, atau daring',
@@ -608,8 +660,10 @@ const translations: Record<string, string> = {
     'Delete gallery image?': 'Hapus gambar galeri ini?',
     Adjust: 'Sesuaikan',
     'Deactivate account?': 'Nonaktifkan rekening ini?',
-    'Transaction history will be preserved.': 'Riwayat transaksi akan tetap disimpan.',
-    'This account has no transaction history.': 'Rekening ini belum memiliki riwayat transaksi.',
+    'Transaction history will be preserved.':
+        'Riwayat transaksi akan tetap disimpan.',
+    'This account has no transaction history.':
+        'Rekening ini belum memiliki riwayat transaksi.',
     'Add gallery images': 'Tambah Gambar Galeri',
     'Current gallery': 'Galeri Saat Ini',
     'No hero image': 'Belum ada foto utama',
@@ -622,46 +676,86 @@ const translations: Record<string, string> = {
     'Recent transactions': 'Transaksi Terbaru',
     'Latest ledger activity': 'Aktivitas transaksi terbaru',
     'View all': 'Lihat Semua',
-    'Maintain non-formal learning, courses, workshops, and professional development.': 'Kelola pelatihan nonformal, kursus, lokakarya, dan pengembangan profesional.',
-    'Add your first course or professional development entry.': 'Tambahkan kursus atau pengembangan profesional pertama Anda.',
-    'Keep program, institution, and timeline details accurate.': 'Pastikan detail program, institusi, dan periode tetap akurat.',
-    'Add a course, workshop, bootcamp, or professional development program.': 'Tambahkan kursus, lokakarya, bootcamp, atau program pengembangan profesional.',
-    'Maintain the concise technology vocabulary used across projects.': 'Kelola daftar teknologi yang digunakan pada proyek.',
-    'Add the first technology before connecting it to projects.': 'Tambahkan teknologi sebelum menghubungkannya ke proyek.',
-    'Project relationships will be detached.': 'Relasi teknologi dengan proyek akan dilepas.',
-    'Keep the name, slug, and icon identifier consistent.': 'Pastikan nama, slug, dan identitas ikon konsisten.',
-    'Add a reusable technology identifier for project case studies.': 'Tambahkan teknologi yang dapat digunakan pada studi kasus proyek.',
-    'Manage professional channels and direct contact destinations.': 'Kelola media profesional dan tujuan kontak langsung.',
-    'Add a channel where visitors can learn more or get in touch.': 'Tambahkan media agar pengunjung dapat mengetahui lebih lanjut atau menghubungi Anda.',
-    'Keep the destination, label, and visibility accurate.': 'Pastikan tujuan, label, dan visibilitas tetap akurat.',
-    'Add a professional channel or contact destination.': 'Tambahkan media profesional atau tujuan kontak.',
-    'Organize capabilities into concise, natural groups.': 'Kelompokkan keahlian secara ringkas dan natural.',
-    'Add your first skill to begin shaping the capabilities section.': 'Tambahkan keahlian pertama untuk mulai membangun bagian keahlian.',
-    'Keep the skill name, grouping, and visibility accurate.': 'Pastikan nama, kelompok, dan visibilitas keahlian tetap akurat.',
-    'Add a capability and place it in a clear, credible category.': 'Tambahkan keahlian ke dalam kategori yang jelas dan relevan.',
-    'Manage core metadata, branding assets, contact details, and footer copy.': 'Kelola metadata utama, aset merek, detail kontak, dan teks footer.',
-    'Manage selected work and professional case studies.': 'Kelola proyek pilihan dan studi kasus profesional.',
-    'Create your first project to start building your portfolio.': 'Buat proyek pertama untuk mulai membangun portofolio.',
-    'The thumbnail and all gallery images will also be deleted.': 'Gambar sampul dan seluruh gambar galeri juga akan dihapus.',
-    'Refine the case study, media, technology, and publishing details.': 'Perbarui studi kasus, media, teknologi, dan detail publikasi.',
-    'Build a clear case study around the problem, decisions, and result.': 'Susun studi kasus yang jelas mengenai masalah, keputusan, dan hasil.',
-    'Maintain a clear timeline of roles and meaningful professional work.': 'Kelola linimasa peran dan pengalaman profesional secara jelas.',
-    'Add the first role in your professional timeline.': 'Tambahkan peran pertama dalam linimasa profesional Anda.',
-    'Keep this professional chapter concise, accurate, and current.': 'Pastikan pengalaman ini ringkas, akurat, dan terkini.',
-    'Capture the role, period, and work that best explains your professional path.': 'Catat peran, periode, dan pekerjaan yang menggambarkan perjalanan profesional Anda.',
-    'Maintain the academic background that supports your professional profile.': 'Kelola riwayat pendidikan yang mendukung profil profesional Anda.',
-    'Add your first academic entry.': 'Tambahkan riwayat pendidikan pertama Anda.',
-    'Keep institution, study, and timeline details accurate.': 'Pastikan detail institusi, studi, dan periode tetap akurat.',
-    'Add a concise academic entry that supports your professional story.': 'Tambahkan riwayat pendidikan ringkas yang mendukung profil profesional Anda.',
-    'Manage credentials that add meaningful context to your profile.': 'Kelola kredensial yang mendukung profil profesional Anda.',
-    'Add a relevant certificate when it supports your professional profile.': 'Tambahkan sertifikat yang relevan untuk mendukung profil profesional Anda.',
-    'Keep credential details and visibility current.': 'Pastikan detail kredensial dan visibilitas tetap terkini.',
-    'Record a relevant credential without overloading the professional narrative.': 'Catat kredensial relevan secara ringkas.',
-    'A private snapshot of your manually managed accounts and cash flow.': 'Ringkasan privat rekening dan arus kas yang dikelola secara manual.',
-    'Active certificates can appear on the public website.': 'Sertifikat aktif dapat ditampilkan pada website publik.',
-    'Active education entries can appear on the public website.': 'Riwayat pendidikan aktif dapat ditampilkan pada website publik.',
-    'Active links can be displayed on the public website.': 'Media sosial aktif dapat ditampilkan pada website publik.',
-    'Active skills can be shown on the public website.': 'Keahlian aktif dapat ditampilkan pada website publik.',
+    'Maintain non-formal learning, courses, workshops, and professional development.':
+        'Kelola pelatihan nonformal, kursus, lokakarya, dan pengembangan profesional.',
+    'Add your first course or professional development entry.':
+        'Tambahkan kursus atau pengembangan profesional pertama Anda.',
+    'Keep program, institution, and timeline details accurate.':
+        'Pastikan detail program, institusi, dan periode tetap akurat.',
+    'Add a course, workshop, bootcamp, or professional development program.':
+        'Tambahkan kursus, lokakarya, bootcamp, atau program pengembangan profesional.',
+    'Maintain the concise technology vocabulary used across projects.':
+        'Kelola daftar teknologi yang digunakan pada proyek.',
+    'Add the first technology before connecting it to projects.':
+        'Tambahkan teknologi sebelum menghubungkannya ke proyek.',
+    'Project relationships will be detached.':
+        'Relasi teknologi dengan proyek akan dilepas.',
+    'Keep the name, slug, and icon identifier consistent.':
+        'Pastikan nama, slug, dan identitas ikon konsisten.',
+    'Add a reusable technology identifier for project case studies.':
+        'Tambahkan teknologi yang dapat digunakan pada studi kasus proyek.',
+    'Manage professional channels and direct contact destinations.':
+        'Kelola media profesional dan tujuan kontak langsung.',
+    'Add a channel where visitors can learn more or get in touch.':
+        'Tambahkan media agar pengunjung dapat mengetahui lebih lanjut atau menghubungi Anda.',
+    'Keep the destination, label, and visibility accurate.':
+        'Pastikan tujuan, label, dan visibilitas tetap akurat.',
+    'Add a professional channel or contact destination.':
+        'Tambahkan media profesional atau tujuan kontak.',
+    'Organize capabilities into concise, natural groups.':
+        'Kelompokkan keahlian secara ringkas dan natural.',
+    'Add your first skill to begin shaping the capabilities section.':
+        'Tambahkan keahlian pertama untuk mulai membangun bagian keahlian.',
+    'Keep the skill name, grouping, and visibility accurate.':
+        'Pastikan nama, kelompok, dan visibilitas keahlian tetap akurat.',
+    'Add a capability and place it in a clear, credible category.':
+        'Tambahkan keahlian ke dalam kategori yang jelas dan relevan.',
+    'Manage core metadata, branding assets, contact details, and footer copy.':
+        'Kelola metadata utama, aset merek, detail kontak, dan teks footer.',
+    'Manage selected work and professional case studies.':
+        'Kelola proyek pilihan dan studi kasus profesional.',
+    'Create your first project to start building your portfolio.':
+        'Buat proyek pertama untuk mulai membangun portofolio.',
+    'The thumbnail and all gallery images will also be deleted.':
+        'Gambar sampul dan seluruh gambar galeri juga akan dihapus.',
+    'Refine the case study, media, technology, and publishing details.':
+        'Perbarui studi kasus, media, teknologi, dan detail publikasi.',
+    'Build a clear case study around the problem, decisions, and result.':
+        'Susun studi kasus yang jelas mengenai masalah, keputusan, dan hasil.',
+    'Maintain a clear timeline of roles and meaningful professional work.':
+        'Kelola linimasa peran dan pengalaman profesional secara jelas.',
+    'Add the first role in your professional timeline.':
+        'Tambahkan peran pertama dalam linimasa profesional Anda.',
+    'Keep this professional chapter concise, accurate, and current.':
+        'Pastikan pengalaman ini ringkas, akurat, dan terkini.',
+    'Capture the role, period, and work that best explains your professional path.':
+        'Catat peran, periode, dan pekerjaan yang menggambarkan perjalanan profesional Anda.',
+    'Maintain the academic background that supports your professional profile.':
+        'Kelola riwayat pendidikan yang mendukung profil profesional Anda.',
+    'Add your first academic entry.':
+        'Tambahkan riwayat pendidikan pertama Anda.',
+    'Keep institution, study, and timeline details accurate.':
+        'Pastikan detail institusi, studi, dan periode tetap akurat.',
+    'Add a concise academic entry that supports your professional story.':
+        'Tambahkan riwayat pendidikan ringkas yang mendukung profil profesional Anda.',
+    'Manage credentials that add meaningful context to your profile.':
+        'Kelola kredensial yang mendukung profil profesional Anda.',
+    'Add a relevant certificate when it supports your professional profile.':
+        'Tambahkan sertifikat yang relevan untuk mendukung profil profesional Anda.',
+    'Keep credential details and visibility current.':
+        'Pastikan detail kredensial dan visibilitas tetap terkini.',
+    'Record a relevant credential without overloading the professional narrative.':
+        'Catat kredensial relevan secara ringkas.',
+    'A private snapshot of your manually managed accounts and cash flow.':
+        'Ringkasan privat rekening dan arus kas yang dikelola secara manual.',
+    'Active certificates can appear on the public website.':
+        'Sertifikat aktif dapat ditampilkan pada website publik.',
+    'Active education entries can appear on the public website.':
+        'Riwayat pendidikan aktif dapat ditampilkan pada website publik.',
+    'Active links can be displayed on the public website.':
+        'Media sosial aktif dapat ditampilkan pada website publik.',
+    'Active skills can be shown on the public website.':
+        'Keahlian aktif dapat ditampilkan pada website publik.',
     'Add debt or receivable': 'Tambah Hutang atau Piutang',
     'Edit debt or receivable': 'Edit Hutang atau Piutang',
     'Debt details': 'Detail Hutang',
@@ -677,18 +771,24 @@ const translations: Record<string, string> = {
     'Certificate preview': 'Pratinjau sertifikat',
     'Current favicon preview': 'Pratinjau favicon saat ini',
     'Current logo preview': 'Pratinjau logo saat ini',
-    'Brief context about this capability.': 'Keterangan singkat mengenai keahlian ini.',
-    'Optional context about the program or focus.': 'Keterangan opsional mengenai program atau fokus.',
-    'Optional icon name or asset reference.': 'Nama ikon atau referensi aset opsional.',
+    'Brief context about this capability.':
+        'Keterangan singkat mengenai keahlian ini.',
+    'Optional context about the program or focus.':
+        'Keterangan opsional mengenai program atau fokus.',
+    'Optional icon name or asset reference.':
+        'Nama ikon atau referensi aset opsional.',
     'Optional value from 0 to 100.': 'Nilai opsional dari 0 sampai 100.',
-    'Use natural groupings such as Engineering or Infrastructure.': 'Gunakan kelompok yang natural seperti Engineering atau Infrastructure.',
+    'Use natural groupings such as Engineering or Infrastructure.':
+        'Gunakan kelompok yang natural seperti Engineering atau Infrastructure.',
     'Follow on GitHub': 'Ikuti di GitHub',
     'All publishing': 'Semua Publikasi',
     'All featured': 'Semua Status Unggulan',
     Branding: 'Identitas Merek',
     'Contact and footer': 'Kontak dan Footer',
-    'Default contact destinations and footer text.': 'Tujuan kontak bawaan dan teks footer.',
-    'Default search metadata for public pages.': 'Metadata pencarian bawaan untuk halaman publik.',
+    'Default contact destinations and footer text.':
+        'Tujuan kontak bawaan dan teks footer.',
+    'Default search metadata for public pages.':
+        'Metadata pencarian bawaan untuk halaman publik.',
     General: 'Umum',
     'Interval days': 'Interval hari',
     Manage: 'Kelola',
@@ -696,13 +796,112 @@ const translations: Record<string, string> = {
     'No records yet.': 'Belum ada data.',
     None: 'Tidak ada',
     Order: 'Urutan',
-    'Simple assets used by the site shell and browser.': 'Aset sederhana yang digunakan oleh tampilan website dan browser.',
-    'The primary name and description of the website.': 'Nama dan deskripsi utama website.',
+    Categories: 'Kategori',
+    Created: 'Dibuat',
+    'Category name': 'Nama kategori',
+    'Category type': 'Jenis kategori',
+    'Active category': 'Kategori aktif',
+    'Finance categories': 'Kategori keuangan',
+    'Finance · Categories': 'Keuangan · Kategori',
+    'Add category': 'Tambah kategori',
+    'Edit category': 'Edit kategori',
+    'Add finance category': 'Tambah kategori keuangan',
+    'Edit finance category': 'Edit kategori keuangan',
+    'Save category': 'Simpan kategori',
+    'No finance categories': 'Belum ada kategori keuangan',
+    'Delete category?': 'Hapus kategori?',
+    'Manage income and expense categories used by finance transactions.':
+        'Kelola kategori pemasukan dan pengeluaran yang digunakan dalam transaksi keuangan.',
+    'Add a category before recording income or expense transactions.':
+        'Tambahkan kategori sebelum mencatat transaksi pemasukan atau pengeluaran.',
+    'Create an income or expense category for finance transactions.':
+        'Buat kategori pemasukan atau pengeluaran untuk transaksi keuangan.',
+    'Update the category name, transaction type, or status.':
+        'Perbarui nama kategori, jenis transaksi, atau status.',
+    'Only active categories are available for new transactions.':
+        'Hanya kategori aktif yang tersedia untuk transaksi baru.',
+    'Categories used by finance records will be deactivated to preserve history.':
+        'Kategori yang sudah digunakan akan dinonaktifkan untuk menjaga riwayat.',
+    'Finance category created.': 'Kategori keuangan berhasil ditambahkan.',
+    'Finance category updated.': 'Kategori keuangan berhasil diperbarui.',
+    'Finance category deleted.': 'Kategori keuangan berhasil dihapus.',
+    'Category deactivated because it is in use.':
+        'Kategori dinonaktifkan karena sudah digunakan.',
+    Language: 'Bahasa',
+    'Close navigation': 'Tutup navigasi',
+    'Open navigation': 'Buka navigasi',
+    'Open account menu': 'Buka menu akun',
+    'Log Out': 'Keluar',
+    'Social Media': 'Media Sosial',
+    'Important Documents': 'Berkas Penting',
+    'Asset added successfully.': 'Aset berhasil ditambahkan.',
+    'Asset updated successfully.': 'Aset berhasil diperbarui.',
+    'Asset deleted successfully.': 'Aset berhasil dihapus.',
+    'Document added successfully.': 'Berkas berhasil ditambahkan.',
+    'Document updated successfully.': 'Berkas berhasil diperbarui.',
+    'Document deleted successfully.': 'Berkas berhasil dihapus.',
+    'Recurring bill added successfully.': 'Tagihan rutin berhasil ditambahkan.',
+    'Recurring bill updated successfully.':
+        'Tagihan rutin berhasil diperbarui.',
+    'Recurring bill deactivated successfully.':
+        'Tagihan rutin berhasil dinonaktifkan.',
+    'Recurring bill deleted successfully.': 'Tagihan rutin berhasil dihapus.',
+    'Bill marked as paid successfully.': 'Tagihan berhasil ditandai lunas.',
+    'Debt or receivable added successfully.':
+        'Hutang atau piutang berhasil ditambahkan.',
+    'Debt or receivable updated successfully.':
+        'Hutang atau piutang berhasil diperbarui.',
+    'Debt or receivable cancelled successfully.':
+        'Hutang atau piutang berhasil dibatalkan.',
+    'Debt or receivable deleted successfully.':
+        'Hutang atau piutang berhasil dihapus.',
+    'Payment schedule added successfully.':
+        'Jadwal pembayaran berhasil ditambahkan.',
+    'Debt payment recorded successfully.':
+        'Pembayaran hutang berhasil dicatat.',
+    'Receivable payment received successfully.':
+        'Pembayaran piutang berhasil diterima.',
+    'Savings goal added successfully.': 'Target tabungan berhasil ditambahkan.',
+    'Savings goal updated successfully.':
+        'Target tabungan berhasil diperbarui.',
+    'Savings goal cancelled successfully.':
+        'Target tabungan berhasil dibatalkan.',
+    'Savings goal deleted successfully.': 'Target tabungan berhasil dihapus.',
+    'Monthly target saved successfully.': 'Target bulanan berhasil disimpan.',
+    'Savings contribution added successfully.':
+        'Setoran tabungan berhasil ditambahkan.',
+    'Savings withdrawal recorded successfully.':
+        'Pengambilan tabungan berhasil dicatat.',
+    'Subscription added successfully.': 'Langganan berhasil ditambahkan.',
+    'Subscription updated successfully.': 'Langganan berhasil diperbarui.',
+    'Subscription deactivated successfully.':
+        'Langganan berhasil dinonaktifkan.',
+    'Subscription deleted successfully.': 'Langganan berhasil dihapus.',
+    'Subscription payment recorded successfully.':
+        'Pembayaran langganan berhasil dicatat.',
+    'The category must be an active category matching the transaction type.':
+        'Kategori harus aktif dan sesuai dengan jenis transaksi.',
+    'Transactions can only be recorded against active accounts.':
+        'Transaksi hanya dapat dicatat pada rekening aktif.',
+    'Simple assets used by the site shell and browser.':
+        'Aset sederhana yang digunakan oleh tampilan website dan browser.',
+    'The primary name and description of the website.':
+        'Nama dan deskripsi utama website.',
 };
 
 const attributeNames = ['placeholder', 'aria-label', 'title'] as const;
 
+let activeLocale: 'en' | 'id' = 'en';
+
+export function setUiLocale(locale: unknown): void {
+    activeLocale = locale === 'id' ? 'id' : 'en';
+}
+
 export function translateUi(value: string): string {
+    if (activeLocale !== 'id') {
+        return value;
+    }
+
     const trimmed = value.trim();
     const translated = translations[trimmed];
 
@@ -716,14 +915,15 @@ function localize(root: ParentNode): void {
     while (node) {
         if (
             node.parentElement &&
-            !['SCRIPT', 'STYLE'].includes(node.parentElement.tagName)
+            !['SCRIPT', 'STYLE'].includes(node.parentElement.tagName) &&
+            !node.parentElement.closest('[data-no-translate]')
         ) {
             const localized = translateUi(node.textContent ?? '');
 
             if (localized !== node.textContent) {
                 node.textContent = localized;
             }
-}
+        }
 
         node = walker.nextNode();
     }
@@ -746,11 +946,7 @@ function localize(root: ParentNode): void {
 }
 
 export function initializeUiLocalization(): void {
-    if (
-        window.location.pathname === '/' ||
-        window.location.pathname === '/login' ||
-        window.location.pathname.startsWith('/projects')
-    ) {
+    if (!window.location.pathname.startsWith('/admin')) {
         return;
     }
 
@@ -760,10 +956,10 @@ export function initializeUiLocalization(): void {
             mutations.forEach((mutation) =>
                 mutation.addedNodes.forEach((node) => {
                     if (node.nodeType === Node.TEXT_NODE && node.parentNode) {
-localize(node.parentNode);
-} else if (node instanceof Element) {
-localize(node);
-}
+                        localize(node.parentNode);
+                    } else if (node instanceof Element) {
+                        localize(node);
+                    }
                 }),
             ),
         ).observe(document.documentElement, { childList: true, subtree: true });

@@ -18,4 +18,14 @@ class FinanceCategory extends Model
     {
         return $this->hasMany(FinanceTransaction::class, 'category_id');
     }
+
+    public function recurringBills(): HasMany
+    {
+        return $this->hasMany(FinanceRecurringBill::class, 'category_id');
+    }
+
+    public function isInUse(): bool
+    {
+        return $this->transactions()->exists() || $this->recurringBills()->exists();
+    }
 }
