@@ -204,7 +204,7 @@ function changeLanguage(event: Event): void {
                     href="/admin"
                     class="text-[1.05rem] font-semibold tracking-[-0.015em]"
                 >
-                    RS My Workspace
+                     My Workspace
                 </Link>
                 <Button
                     variant="ghost"
