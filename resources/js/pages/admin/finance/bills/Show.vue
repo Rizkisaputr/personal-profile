@@ -33,7 +33,7 @@ const f = useForm({
     <Head :title="bill.name" /><PageHeader
         eyebrow="Finance · Bills"
         :title="bill.name"
-        :description="`Jatuh tempo berikutnya ${new Date(bill.next_due_date).toLocaleDateString('id-ID')}`"
+        :description="`Next due date ${new Date(bill.next_due_date).toLocaleDateString('en-US')}`"
         ><template #actions
             ><Link
                 :href="`/admin/finance/bills/${bill.id}/edit`"
@@ -53,10 +53,10 @@ const f = useForm({
         >
             <h2 class="font-semibold">Mark as Paid</h2>
             <div class="mt-4 grid gap-3">
-                <CurrencyInput v-model="f.amount" placeholder="Contoh: 500.000" /><Input
-                    v-model="f.paid_at"
-                    type="date"
-                /><select
+                <CurrencyInput
+                    v-model="f.amount"
+                    placeholder="Example: 500,000"
+                /><Input v-model="f.paid_at" type="date" /><select
                     v-model="f.account_id"
                     class="h-10 rounded-md border px-3"
                 >
@@ -77,7 +77,7 @@ const f = useForm({
                 class="flex justify-between border-b py-3 text-sm"
             >
                 <span>{{
-                    new Date(pmt.paid_at).toLocaleDateString('id-ID')
+                    new Date(pmt.paid_at).toLocaleDateString('en-US')
                 }}</span
                 ><span>{{ formatIDR(pmt.amount) }}</span>
             </div>

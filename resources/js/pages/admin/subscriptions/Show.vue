@@ -32,7 +32,7 @@ const form = useForm({
     <Head :title="subscription.service_name" /><PageHeader
         eyebrow="Personal · Subscription"
         :title="subscription.service_name"
-        :description="`Perpanjangan berikutnya ${new Date(subscription.next_renewal_date).toLocaleDateString('id-ID')}`"
+        :description="`Next renewal ${new Date(subscription.next_renewal_date).toLocaleDateString('en-US')}`"
         ><template #actions
             ><Link
                 :href="`/admin/subscriptions/${subscription.id}/edit`"
@@ -54,7 +54,7 @@ const form = useForm({
             <div class="mt-4 grid gap-3">
                 <CurrencyInput
                     v-model="form.amount"
-                    placeholder="Contoh: 150.000"
+                    placeholder="Example: 150,000"
                 /><Input v-model="form.paid_at" type="date" /><select
                     v-model="form.account_id"
                     class="h-10 rounded-md border bg-background px-3"
@@ -81,7 +81,7 @@ const form = useForm({
                 class="flex justify-between border-b py-3 text-sm"
             >
                 <span>{{
-                    new Date(payment.paid_at).toLocaleDateString('id-ID')
+                    new Date(payment.paid_at).toLocaleDateString('en-US')
                 }}</span
                 ><span>{{ formatIDR(payment.amount) }}</span>
             </div>

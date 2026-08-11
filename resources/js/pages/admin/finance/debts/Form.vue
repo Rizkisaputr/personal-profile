@@ -64,7 +64,7 @@ function submit() {
             ><CurrencyInput
                 id="amount"
                 v-model="f.original_amount"
-                placeholder="Contoh: 1.000.000" /></FormField
+                placeholder="Example: 1,000,000" /></FormField
         ><FormField id="start" label="Start date"
             ><Input id="start" v-model="f.start_date" type="date" /></FormField
         ><FormField id="status" label="Status"

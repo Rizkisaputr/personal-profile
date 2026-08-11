@@ -56,7 +56,7 @@ defineProps<{ goals: G[] }>();
             </div>
             <div>
                 <p class="text-sm">
-                    Bulan ini {{ g.current_month.progress }}%
+                    This month {{ g.current_month.progress }}%
                 </p>
                 <p class="text-xs text-muted-foreground">
                     {{ formatIDR(g.current_month.actual) }} /
@@ -66,7 +66,7 @@ defineProps<{ goals: G[] }>();
             <p class="text-sm text-muted-foreground">
                 {{
                     g.target_date
-                        ? new Date(g.target_date).toLocaleDateString('id-ID')
+                        ? new Date(g.target_date).toLocaleDateString('en-US')
                         : '—'
                 }}
             </p>
@@ -74,7 +74,7 @@ defineProps<{ goals: G[] }>();
                 :href="`/admin/finance/savings/${g.id}`"
                 :class="buttonVariants({ variant: 'outline', size: 'sm' })"
             >
-                Kelola Tabungan
+                Manage Savings
             </Link>
         </div>
         <p v-if="!goals.length" class="p-10 text-center text-muted-foreground">

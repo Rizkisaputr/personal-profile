@@ -32,7 +32,7 @@ class FinanceSavingsController extends Controller
     {
         $g = FinanceSavingsGoal::create($this->validated($r));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Target tabungan berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Savings goal added successfully.']);
 
         return to_route('admin.finance.savings.show', $g);
     }
@@ -53,7 +53,7 @@ class FinanceSavingsController extends Controller
     {
         $saving->update($this->validated($r));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Target tabungan berhasil diperbarui.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Savings goal updated successfully.']);
 
         return to_route('admin.finance.savings.show', $saving);
     }
@@ -65,7 +65,7 @@ class FinanceSavingsController extends Controller
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $cancelled ? 'Target tabungan berhasil dibatalkan.' : 'Target tabungan berhasil dihapus.',
+            'message' => $cancelled ? 'Savings goal cancelled successfully.' : 'Savings goal deleted successfully.',
         ]);
 
         return to_route('admin.finance.savings.index');
@@ -76,7 +76,7 @@ class FinanceSavingsController extends Controller
         $v = $r->validate(['year' => ['required', 'integer', 'between:2000,2100'], 'month' => ['required', 'integer', 'between:1,12'], 'target_amount' => ['required', 'decimal:0,2', 'gt:0']]);
         FinanceSavingsMonthlyTarget::updateOrCreate(['savings_goal_id' => $saving->id, 'year' => $v['year'], 'month' => $v['month']], ['target_amount' => $v['target_amount']]);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Target bulanan berhasil disimpan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Monthly target saved successfully.']);
 
         return back();
     }
@@ -97,7 +97,7 @@ class FinanceSavingsController extends Controller
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $v['type'] === 'contribution' ? 'Tabungan berhasil ditambahkan.' : 'Tabungan berhasil diambil.',
+            'message' => $v['type'] === 'contribution' ? 'Savings contribution added successfully.' : 'Savings withdrawal recorded successfully.',
         ]);
 
         return back();

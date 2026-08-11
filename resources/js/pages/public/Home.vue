@@ -5,7 +5,6 @@ import MotionReveal from '@/components/MotionReveal.vue';
 import ProfileVisual from '@/components/public/ProfileVisual.vue';
 import ProjectCard from '@/components/public/ProjectCard.vue';
 import SeoHead from '@/components/public/SeoHead.vue';
-import SocialLinks from '@/components/public/SocialLinks.vue';
 import type { HomePageProps, Skill } from '@/types';
 
 const props = defineProps<HomePageProps>();
@@ -520,12 +519,8 @@ const trainingPeriod = (
                     <a
                         :href="contactHref"
                         class="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white hover:text-[#c8d6ff]"
-                        >Get in touch <ArrowUpRight class="size-4" /></a
-                    ><SocialLinks
-                        v-if="socialLinks.length"
-                        :links="socialLinks"
-                        compact
-                    />
+                        >Get in touch <ArrowUpRight class="size-4"
+                    /></a>
                 </div></div
         ></MotionReveal>
     </section>

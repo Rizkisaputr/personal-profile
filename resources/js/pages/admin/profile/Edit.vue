@@ -37,7 +37,8 @@ const currentImageName = props.profile.profile_image?.split('/').pop() ?? null;
 const heroImagePreview = ref<string | null>(props.profile.hero_image_url);
 const currentHeroImageName = props.profile.hero_image?.split('/').pop() ?? null;
 const loginImagePreview = ref<string | null>(props.profile.login_image_url);
-const currentLoginImageName = props.profile.login_image?.split('/').pop() ?? null;
+const currentLoginImageName =
+    props.profile.login_image?.split('/').pop() ?? null;
 const selectedCvName = ref<string | null>(props.profile.cv_name);
 let objectUrl: string | null = null;
 let heroObjectUrl: string | null = null;
@@ -113,25 +114,28 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <Head title="Profil" />
+    <Head title="Profile" />
     <PageHeader
-        eyebrow="Profil"
-        title="Profil Pribadi"
-        description="Kelola informasi utama untuk portofolio dan profil profesional Anda."
+        eyebrow="Profile"
+        title="Personal Profile"
+        description="Manage the core information for your portfolio and professional profile."
     />
 
     <form class="mt-8 space-y-8" @submit.prevent="submit">
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-6 border-b border-border pb-5">
-                <h2 class="text-base font-semibold tracking-[-0.015em]">Identitas</h2>
+                <h2 class="text-base font-semibold tracking-[-0.015em]">
+                    Identitas
+                </h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Nama, profesi, dan tagline yang mewakili profil Anda.
+                    Your name, profession, and a tagline that represents your
+                    profile.
                 </p>
             </div>
             <div class="grid gap-6 md:grid-cols-2">
                 <FormField
                     id="full_name"
-                    label="Nama Lengkap"
+                    label="Full Name"
                     :error="form.errors.full_name"
                     required
                 >
@@ -162,10 +166,10 @@ onBeforeUnmount(() => {
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-6 border-b border-border pb-5">
                 <h2 class="text-base font-semibold tracking-[-0.015em]">
-                    Foto Profil
+                    Profile Photos
                 </h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Kelola foto sidebar, foto utama, dan foto login secara terpisah.
+                    Manage the sidebar, hero, and login photos separately.
                 </p>
             </div>
             <div class="grid min-w-0 gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -176,24 +180,26 @@ onBeforeUnmount(() => {
                         <img
                             v-if="imagePreview"
                             :src="imagePreview"
-                            alt="Pratinjau foto profil sidebar"
+                            alt="Sidebar profile photo preview"
                             class="h-full w-full object-cover object-center"
                         />
                         <div
                             v-else
                             class="grid h-full place-items-center text-sm text-muted-foreground"
                         >
-                            Belum ada foto
+                            No photo yet
                         </div>
                     </div>
                     <FileUploadField
                         id="profile_image"
                         class="mt-6"
-                        label="Foto Profil Sidebar"
+                        label="Sidebar Profile Photo"
                         accept="image/jpeg,image/png,image/webp"
-                        hint="Digunakan untuk foto profil kecil di sidebar publik dan avatar admin. Rekomendasi: rasio 1:1 minimal 600 × 600 px. JPG, PNG, atau WebP · maks. 6 MB."
+                        hint="Used for the small profile photo in the public sidebar and admin avatar. Recommended: 1:1 ratio, at least 600 × 600 px. JPG, PNG, or WebP · max. 6 MB."
                         :error="form.errors.profile_image"
-                        :current-name="form.profile_image?.name || currentImageName"
+                        :current-name="
+                            form.profile_image?.name || currentImageName
+                        "
                         @change="selectImage"
                     />
                 </div>
@@ -205,24 +211,26 @@ onBeforeUnmount(() => {
                         <img
                             v-if="heroImagePreview"
                             :src="heroImagePreview"
-                            alt="Pratinjau foto utama"
+                            alt="Hero photo preview"
                             class="h-full w-full object-contain"
                         />
                         <div
                             v-else
                             class="grid h-full place-items-center px-4 text-center text-sm text-muted-foreground"
                         >
-                            Belum ada foto utama
+                            No hero photo yet
                         </div>
                     </div>
                     <FileUploadField
                         id="hero_image"
                         class="mt-6"
-                        label="Foto Utama"
+                        label="Hero Photo"
                         accept="image/jpeg,image/png,image/webp"
-                        hint="Digunakan sebagai foto utama pada landing page. Rekomendasi: portrait atau half-body background putih/transparan minimal tinggi 1000 px. JPG, PNG, atau WebP · maks. 6 MB."
+                        hint="Used as the main photo on the landing page. Recommended: portrait or half-body with a white/transparent background, at least 1000 px tall. JPG, PNG, or WebP · max. 6 MB."
                         :error="form.errors.hero_image"
-                        :current-name="form.hero_image?.name || currentHeroImageName"
+                        :current-name="
+                            form.hero_image?.name || currentHeroImageName
+                        "
                         @change="selectHeroImage"
                     />
                 </div>
@@ -234,24 +242,26 @@ onBeforeUnmount(() => {
                         <img
                             v-if="loginImagePreview"
                             :src="loginImagePreview"
-                            alt="Pratinjau foto login"
+                            alt="Login photo preview"
                             class="h-full w-full object-contain"
                         />
                         <div
                             v-else
                             class="grid h-full place-items-center px-4 text-center text-sm text-muted-foreground"
                         >
-                            Belum ada foto login
+                            No login photo yet
                         </div>
                     </div>
                     <FileUploadField
                         id="login_image"
                         class="mt-6"
-                        label="Foto Login"
+                        label="Login Photo"
                         accept="image/jpeg,image/png,image/webp"
-                        hint="Digunakan sebagai foto besar pada halaman login admin. Rekomendasi: foto portrait atau half-body dengan background putih/transparan, minimal tinggi 1000 px · maks. 6 MB."
+                        hint="Used as the large photo on the admin login page. Recommended: portrait or half-body with a white/transparent background, at least 1000 px tall · max. 6 MB."
                         :error="form.errors.login_image"
-                        :current-name="form.login_image?.name || currentLoginImageName"
+                        :current-name="
+                            form.login_image?.name || currentLoginImageName
+                        "
                         @change="selectLoginImage"
                     />
                 </div>
@@ -260,9 +270,11 @@ onBeforeUnmount(() => {
 
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-6 border-b border-border pb-5">
-                <h2 class="text-base font-semibold tracking-[-0.015em]">Tentang</h2>
+                <h2 class="text-base font-semibold tracking-[-0.015em]">
+                    Tentang
+                </h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Ringkasan singkat dan informasi lengkap mengenai profil Anda.
+                    A brief summary and complete information about your profile.
                 </p>
             </div>
             <div class="grid gap-6">
@@ -270,7 +282,7 @@ onBeforeUnmount(() => {
                     id="short_bio"
                     label="Bio Singkat"
                     :error="form.errors.short_bio"
-                    hint="Pengantar singkat untuk bagian profil yang ringkas."
+                    hint="A short introduction for the profile summary."
                 >
                     <FormTextarea
                         id="short_bio"
@@ -283,7 +295,7 @@ onBeforeUnmount(() => {
                     id="about"
                     label="Tentang"
                     :error="form.errors.about"
-                    hint="Informasi profil lengkap. Gunakan paragraf yang natural dan mudah dibaca."
+                    hint="Complete profile information. Use natural, easy-to-read paragraphs."
                 >
                     <FormTextarea
                         id="about"
@@ -298,10 +310,11 @@ onBeforeUnmount(() => {
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-6 border-b border-border pb-5">
                 <h2 class="text-base font-semibold tracking-[-0.015em]">
-                    Informasi Pribadi
+                    Personal Information
                 </h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Detail pribadi tambahan yang ditampilkan sesuai konfigurasi profil.
+                    Additional personal details displayed according to your
+                    profile settings.
                 </p>
             </div>
             <div class="grid gap-6 md:grid-cols-2">
@@ -314,21 +327,25 @@ onBeforeUnmount(() => {
                 </FormField>
                 <FormField
                     id="birth_date"
-                    label="Tanggal Lahir"
+                    label="Date of Birth"
                     :error="form.errors.birth_date"
                 >
-                    <Input id="birth_date" v-model="form.birth_date" type="date" />
+                    <Input
+                        id="birth_date"
+                        v-model="form.birth_date"
+                        type="date"
+                    />
                 </FormField>
                 <FormField
                     id="marital_status"
-                    label="Status Pernikahan"
+                    label="Marital Status"
                     :error="form.errors.marital_status"
-                    hint="Opsional, misalnya Belum Menikah atau Menikah."
+                    hint="Optional, for example Single or Married."
                 >
                     <Input
                         id="marital_status"
                         v-model="form.marital_status"
-                        placeholder="Belum Menikah"
+                        placeholder="Single"
                     />
                 </FormField>
             </div>
@@ -337,10 +354,11 @@ onBeforeUnmount(() => {
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-6 border-b border-border pb-5">
                 <h2 class="text-base font-semibold tracking-[-0.015em]">
-                    Kontak & Ketersediaan
+                    Contact & Availability
                 </h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Informasi kontak profesional, lokasi, dan status ketersediaan.
+                    Professional contact information, location, and availability
+                    status.
                 </p>
             </div>
             <div class="grid min-w-0 gap-6 md:grid-cols-2">
@@ -349,7 +367,7 @@ onBeforeUnmount(() => {
                 </FormField>
                 <FormField
                     id="location"
-                    label="Lokasi"
+                    label="Location"
                     :error="form.errors.location"
                 >
                     <Input id="location" v-model="form.location" />
@@ -370,20 +388,20 @@ onBeforeUnmount(() => {
                 </FormField>
                 <FormField
                     id="availability_status"
-                    label="Status Ketersediaan"
+                    label="Availability Status"
                     :error="form.errors.availability_status"
                 >
                     <Input
                         id="availability_status"
                         v-model="form.availability_status"
-                        placeholder="Tersedia untuk proyek tertentu"
+                        placeholder="Available for selected projects"
                     />
                 </FormField>
                 <FileUploadField
                     id="cv_file"
-                    label="Berkas CV"
+                    label="CV File"
                     accept="application/pdf,.pdf"
-                    hint="Hanya PDF · maks. 5 MB"
+                    hint="PDF only · max. 5 MB"
                     :error="form.errors.cv_file"
                     :current-name="selectedCvName"
                     @change="selectCv"
@@ -395,7 +413,7 @@ onBeforeUnmount(() => {
             class="sticky bottom-4 flex justify-end rounded-xl border border-border bg-card/90 p-3 shadow-sm backdrop-blur-md"
         >
             <Button type="submit" :disabled="form.processing">
-                {{ form.processing ? 'Menyimpan…' : 'Simpan Profil' }}
+                {{ form.processing ? 'Saving…' : 'Save Profile' }}
             </Button>
         </div>
     </form>

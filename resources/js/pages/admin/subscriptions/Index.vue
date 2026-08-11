@@ -50,7 +50,7 @@ defineProps<{ subscriptions: S[] }>();
                     <td class="p-4">
                         {{
                             new Date(item.next_renewal_date).toLocaleDateString(
-                                'id-ID',
+                                'en-US',
                             )
                         }}
                     </td>

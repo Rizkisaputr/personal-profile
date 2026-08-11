@@ -54,7 +54,7 @@ function submit() {
     >
         <Input v-model="f.name" placeholder="Bill name" /><CurrencyInput
             v-model="f.amount"
-            placeholder="Contoh: 500.000"
+            placeholder="Example: 500,000"
         /><select v-model="f.category_id" class="h-10 rounded-md border px-3">
             <option value="">Category</option>
             <option v-for="c in categories" :key="c.id" :value="c.id">

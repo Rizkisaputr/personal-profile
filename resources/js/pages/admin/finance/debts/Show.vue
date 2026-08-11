@@ -87,7 +87,7 @@ const pay = useForm({
             <div class="mt-4 grid gap-3">
                 <Input v-model="schedule.due_date" type="date" /><CurrencyInput
                     v-model="schedule.amount"
-                    placeholder="Contoh: 500.000"
+                    placeholder="Example: 500,000"
                 /><Input v-model="schedule.notes" placeholder="Notes" /><Button
                     >Add schedule</Button
                 >
@@ -107,7 +107,7 @@ const pay = useForm({
             <div class="mt-4 grid gap-3">
                 <CurrencyInput
                     v-model="pay.amount"
-                    placeholder="Contoh: 500.000"
+                    placeholder="Example: 500,000"
                 /><Input v-model="pay.payment_date" type="date" /><select
                     v-model="pay.account_id"
                     class="h-10 rounded-md border px-3"
@@ -128,7 +128,7 @@ const pay = useForm({
                         :key="s.id"
                         :value="s.id"
                     >
-                        {{ new Date(s.due_date).toLocaleDateString('id-ID') }} ·
+                        {{ new Date(s.due_date).toLocaleDateString('en-US') }} ·
                         {{ formatIDR(s.amount) }}
                     </option></select
                 ><Input v-model="pay.notes" placeholder="Notes" /><Button
@@ -145,7 +145,7 @@ const pay = useForm({
             class="flex justify-between border-b py-3 text-sm"
         >
             <span
-                >{{ new Date(s.due_date).toLocaleDateString('id-ID') }}
+                >{{ new Date(s.due_date).toLocaleDateString('en-US') }}
                 <b v-if="s.is_overdue" class="text-red-600">Overdue</b></span
             ><span>{{ formatIDR(s.amount) }} · {{ s.status }}</span>
         </div>
@@ -156,7 +156,7 @@ const pay = useForm({
             class="flex justify-between border-b py-3 text-sm"
         >
             <span>{{
-                new Date(pmt.payment_date).toLocaleDateString('id-ID')
+                new Date(pmt.payment_date).toLocaleDateString('en-US')
             }}</span
             ><span>{{ formatIDR(pmt.amount) }}</span>
         </div>

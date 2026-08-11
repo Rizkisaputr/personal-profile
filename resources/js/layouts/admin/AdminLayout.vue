@@ -74,78 +74,78 @@ onBeforeUnmount(() => {
 
 const workspaceNavigation = [
     {
-        label: 'Profil',
+        label: 'Profile',
         href: '/admin/profile',
         icon: UserRound,
     },
-    { label: 'Keahlian', href: '/admin/skills', icon: Sparkles },
+    { label: 'Skills', href: '/admin/skills', icon: Sparkles },
     {
-        label: 'Pengalaman',
+        label: 'Experience',
         href: '/admin/experiences',
         icon: BriefcaseBusiness,
     },
     {
-        label: 'Pendidikan',
+        label: 'Education',
         href: '/admin/educations',
         icon: GraduationCap,
     },
     {
-        label: 'Pelatihan & Kursus',
+        label: 'Training & Courses',
         href: '/admin/trainings',
         icon: BookOpenCheck,
     },
     {
-        label: 'Proyek',
+        label: 'Projects',
         href: '/admin/projects',
         icon: FolderKanban,
     },
     {
-        label: 'Teknologi',
+        label: 'Technologies',
         href: '/admin/technologies',
         icon: Code2,
     },
     {
-        label: 'Sertifikat',
+        label: 'Certificates',
         href: '/admin/certificates',
         icon: Award,
     },
     {
-        label: 'Media Sosial',
+        label: 'Social Media',
         href: '/admin/social-links',
         icon: Share2,
     },
     {
-        label: 'Pengaturan Website',
+        label: 'Website Settings',
         href: '/admin/settings',
         icon: Settings,
     },
 ];
 
 const financeNavigation = [
-    { label: 'Ringkasan', href: '/admin/finance', icon: ChartPie },
+    { label: 'Overview', href: '/admin/finance', icon: ChartPie },
     {
-        label: 'Transaksi',
+        label: 'Transactions',
         href: '/admin/finance/transactions',
         icon: ArrowLeftRight,
     },
-    { label: 'Rekening', href: '/admin/finance/accounts', icon: Landmark },
+    { label: 'Accounts', href: '/admin/finance/accounts', icon: Landmark },
     {
-        label: 'Hutang & Piutang',
+        label: 'Debts & Receivables',
         href: '/admin/finance/debts',
         icon: HandCoins,
     },
-    { label: 'Tabungan', href: '/admin/finance/savings', icon: PiggyBank },
+    { label: 'Savings', href: '/admin/finance/savings', icon: PiggyBank },
     {
-        label: 'Tagihan Rutin',
+        label: 'Recurring Bills',
         href: '/admin/finance/bills',
         icon: CalendarClock,
     },
 ];
 
 const personalNavigation = [
-    { label: 'Berkas Penting', href: '/admin/documents', icon: FileLock2 },
-    { label: 'Langganan', href: '/admin/subscriptions', icon: RefreshCw },
-    { label: 'Aset', href: '/admin/assets', icon: Package },
+    { label: 'Important Documents', href: '/admin/documents', icon: FileLock2 },
+    { label: 'Subscriptions', href: '/admin/subscriptions', icon: RefreshCw },
+    { label: 'Assets', href: '/admin/assets', icon: Package },
 ];
 
 function isActive(href: string | null): boolean {
@@ -166,7 +166,9 @@ function isActive(href: string | null): boolean {
 
 function accountName(): string {
     return (
-        page.props.profileIdentity?.name || page.props.auth.user.name || 'Akun'
+        page.props.profileIdentity?.name ||
+        page.props.auth.user.name ||
+        'Account'
     );
 }
 
@@ -199,7 +201,7 @@ function handleLogout(): void {
                     variant="ghost"
                     size="icon-sm"
                     class="lg:hidden"
-                    aria-label="Tutup navigasi"
+                    aria-label="Close navigation"
                     @click="mobileOpen = false"
                 >
                     <X class="size-4" />
@@ -208,12 +210,12 @@ function handleLogout(): void {
 
             <nav
                 class="mt-8 flex-1 overflow-y-auto"
-                aria-label="Navigasi admin"
+                aria-label="Admin navigation"
             >
                 <p
                     class="px-3 text-[0.68rem] font-semibold tracking-[0.12em] text-muted-foreground/65 uppercase"
                 >
-                    Ringkasan
+                    Overview
                 </p>
                 <div class="mt-2">
                     <Link
@@ -225,14 +227,14 @@ function handleLogout(): void {
                                 : 'text-muted-foreground hover:bg-sidebar-accent hover:text-foreground'
                         "
                         @click="mobileOpen = false"
-                        ><LayoutDashboard class="size-[18px]" />Dasboard</Link
+                        ><LayoutDashboard class="size-[18px]" />Dashboard</Link
                     >
                 </div>
 
                 <p
                     class="mt-7 px-3 text-[0.68rem] font-semibold tracking-[0.12em] text-muted-foreground/65 uppercase"
                 >
-                    Pribadi
+                    Personal
                 </p>
                 <div class="mt-2 space-y-1">
                     <button
@@ -247,7 +249,7 @@ function handleLogout(): void {
                         aria-controls="finance-navigation"
                         @click="financeOpen = !financeOpen"
                     >
-                        <Wallet class="size-[18px]" /><span>Keuangan</span
+                        <Wallet class="size-[18px]" /><span>Finance</span
                         ><ChevronDown
                             class="ml-auto size-4 transition-transform"
                             :class="financeOpen ? 'rotate-180' : ''"
@@ -294,7 +296,7 @@ function handleLogout(): void {
                 <p
                     class="mt-7 px-3 text-[0.68rem] font-semibold tracking-[0.12em] text-muted-foreground/65 uppercase"
                 >
-                    Portofolio
+                    Portfolio
                 </p>
                 <div class="mt-2 space-y-1">
                     <Link
@@ -328,7 +330,7 @@ function handleLogout(): void {
                             variant="ghost"
                             size="icon"
                             class="lg:hidden"
-                            aria-label="Buka navigasi"
+                            aria-label="Open navigation"
                             aria-controls="admin-navigation"
                             :aria-expanded="mobileOpen"
                             @click="mobileOpen = true"
@@ -341,7 +343,7 @@ function handleLogout(): void {
                             <button
                                 type="button"
                                 class="flex max-w-[13rem] items-center gap-2.5 rounded-lg p-1.5 text-sm font-medium transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
-                                aria-label="Buka menu akun"
+                                aria-label="Open account menu"
                             >
                                 <ProfileAvatar
                                     class="size-9 shrink-0 text-[0.65rem]"
@@ -349,7 +351,7 @@ function handleLogout(): void {
                                     :image-url="
                                         page.props.profileIdentity?.image_url
                                     "
-                                    :alt="`Foto profil ${accountName()}`"
+                                    :alt="`Profile photo for ${accountName()}`"
                                 />
                                 <span
                                     class="hidden min-w-0 truncate sm:block"
@@ -369,7 +371,7 @@ function handleLogout(): void {
                                     href="/admin/profile"
                                     class="flex w-full cursor-pointer items-center gap-2.5"
                                 >
-                                    <UserRound class="size-4" />Profil
+                                    <UserRound class="size-4" />Profile
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem as-child>
@@ -379,7 +381,7 @@ function handleLogout(): void {
                                     rel="noopener noreferrer"
                                     class="flex w-full cursor-pointer items-center gap-2.5"
                                 >
-                                    <ExternalLink class="size-4" />Lihat Website
+                                    <ExternalLink class="size-4" />View Website
                                 </a>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
@@ -391,7 +393,7 @@ function handleLogout(): void {
                                     data-test="logout-button"
                                     @click="handleLogout"
                                 >
-                                    <LogOut class="size-4" />Keluar
+                                    <LogOut class="size-4" />Log Out
                                 </Link>
                             </DropdownMenuItem>
                         </DropdownMenuContent>

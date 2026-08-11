@@ -17,10 +17,10 @@ type G = {
 };
 const p = defineProps<{ goal?: G }>();
 const statusLabels: Record<string, string> = {
-    active: 'Aktif',
+    active: 'Active',
     completed: 'Tercapai',
     paused: 'Dijeda',
-    cancelled: 'Dibatalkan',
+    cancelled: 'Cancelled',
 };
 const f = useForm({
     name: p.goal?.name ?? '',
@@ -48,50 +48,40 @@ function submit() {
         class="surface-panel mt-8 grid gap-5 p-6 md:grid-cols-2"
         @submit.prevent="submit"
     >
-        <FormField
-            id="name"
-            label="Nama Target"
-            :error="f.errors.name"
-            required
-        >
+        <FormField id="name" label="Goal Name" :error="f.errors.name" required>
             <Input
                 id="name"
                 v-model="f.name"
-                placeholder="Masukkan nama target tabungan"
+                placeholder="Enter a savings goal name"
             />
         </FormField>
         <FormField
             id="target_amount"
-            label="Target Nominal"
+            label="Target Amount"
             :error="f.errors.target_amount"
             required
         >
             <CurrencyInput
                 id="target_amount"
                 v-model="f.target_amount"
-                placeholder="Contoh: 10.000.000"
+                placeholder="Example: 10,000,000"
             />
         </FormField>
         <FormField
             id="start_date"
-            label="Tanggal Mulai"
+            label="Start Date"
             :error="f.errors.start_date"
         >
             <Input id="start_date" v-model="f.start_date" type="date" />
         </FormField>
         <FormField
             id="target_date"
-            label="Tanggal Target"
+            label="Target Date"
             :error="f.errors.target_date"
         >
             <Input id="target_date" v-model="f.target_date" type="date" />
         </FormField>
-        <FormField
-            id="status"
-            label="Status"
-            :error="f.errors.status"
-            required
-        >
+        <FormField id="status" label="Status" :error="f.errors.status" required>
             <select
                 id="status"
                 v-model="f.status"
@@ -107,18 +97,18 @@ function submit() {
             </select>
         </FormField>
         <div class="md:col-span-2">
-            <FormField id="notes" label="Catatan" :error="f.errors.notes">
+            <FormField id="notes" label="Notes" :error="f.errors.notes">
                 <FormTextarea
                     id="notes"
                     v-model="f.notes"
                     :rows="4"
-                    placeholder="Masukkan catatan"
+                    placeholder="Enter notes"
                 />
             </FormField>
         </div>
         <div class="flex gap-3 md:col-span-2">
             <Button type="submit" :disabled="f.processing">{{
-                f.processing ? 'Menyimpan…' : 'Simpan'
+                f.processing ? 'Saving…' : 'Save'
             }}</Button
             ><Link
                 href="/admin/finance/savings"

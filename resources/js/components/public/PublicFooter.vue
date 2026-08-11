@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
-import type { PublicProfile, PublicSettings, SocialLink } from '@/types';
-import SocialLinks from './SocialLinks.vue';
+import type { PublicProfile, PublicSettings } from '@/types';
 
 const page = usePage();
 const profile = computed(
     () => (page.props.profile ?? null) as PublicProfile | null,
 );
 const settings = computed(() => (page.props.settings ?? {}) as PublicSettings);
-const socialLinks = computed(
-    () => (page.props.socialLinks ?? []) as SocialLink[],
-);
 const name = computed(
     () =>
         profile.value?.full_name ||
@@ -34,11 +30,6 @@ const name = computed(
                     © {{ new Date().getFullYear() }} {{ name }}
                 </p>
             </div>
-            <SocialLinks
-                v-if="socialLinks.length"
-                :links="socialLinks"
-                compact
-            />
         </div>
     </footer>
 </template>

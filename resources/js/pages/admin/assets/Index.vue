@@ -17,8 +17,8 @@ type A = {
 defineProps<{ assets: A[] }>();
 function removeAsset(id: number): void {
     if (window.confirm('Delete this asset?')) {
-router.delete(`/admin/assets/${id}`);
-}
+        router.delete(`/admin/assets/${id}`);
+    }
 }
 </script>
 <template>
@@ -64,7 +64,7 @@ router.delete(`/admin/assets/${id}`);
                             item.warranty_expiry
                                 ? new Date(
                                       item.warranty_expiry,
-                                  ).toLocaleDateString('id-ID')
+                                  ).toLocaleDateString('en-US')
                                 : '—'
                         }}
                     </td>
@@ -82,7 +82,7 @@ router.delete(`/admin/assets/${id}`);
                                 >Edit</Link
                             ><button
                                 class="text-xs text-destructive"
-                            @click="removeAsset(item.id)"
+                                @click="removeAsset(item.id)"
                             >
                                 Delete
                             </button>

@@ -49,7 +49,7 @@ defineProps<{ bills: B[] }>();
                     new Date(b.next_due_date) < new Date() ? 'text-red-600' : ''
                 "
             >
-                {{ new Date(b.next_due_date).toLocaleDateString('id-ID') }}
+                {{ new Date(b.next_due_date).toLocaleDateString('en-US') }}
             </p>
             <p>{{ b.is_active ? 'Active' : 'Inactive' }}</p>
         </div>

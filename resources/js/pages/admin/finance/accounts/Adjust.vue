@@ -13,7 +13,7 @@ const props = defineProps<{ account: FinanceAccount }>();
 const form = useForm({
     actual_balance: props.account.current_balance || '0',
     transaction_date: new Date().toISOString().slice(0, 10),
-    description: 'Penyesuaian saldo rekening.',
+    description: 'Account balance adjustment.',
 });
 const difference = computed(() =>
     moneyDifference(
@@ -28,7 +28,7 @@ function submit(): void {
 <template>
     <Head title="Adjust account balance" /><PageHeader
         eyebrow="Finance · Accounts"
-        :title="`Sesuaikan ${account.name}`"
+        :title="`Adjust ${account.name}`"
         description="Record a ledger adjustment to match the actual account balance."
     />
     <div class="mt-8 grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
@@ -64,7 +64,7 @@ function submit(): void {
                         id="actual_balance"
                         v-model="form.actual_balance"
                         allow-negative
-                        placeholder="Contoh: 1.000.000" /></FormField
+                        placeholder="Example: 1,000,000" /></FormField
                 ><FormField
                     id="transaction_date"
                     label="Date"

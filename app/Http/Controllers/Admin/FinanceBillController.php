@@ -31,7 +31,7 @@ class FinanceBillController extends Controller
     {
         FinanceRecurringBill::create($this->validated($r));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Tagihan rutin berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Recurring bill added successfully.']);
 
         return to_route('admin.finance.bills.index');
     }
@@ -45,7 +45,7 @@ class FinanceBillController extends Controller
     {
         $bill->update($this->validated($r));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Tagihan rutin berhasil diperbarui.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Recurring bill updated successfully.']);
 
         return to_route('admin.finance.bills.index');
     }
@@ -57,7 +57,7 @@ class FinanceBillController extends Controller
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $deactivated ? 'Tagihan rutin berhasil dinonaktifkan.' : 'Tagihan rutin berhasil dihapus.',
+            'message' => $deactivated ? 'Recurring bill deactivated successfully.' : 'Recurring bill deleted successfully.',
         ]);
 
         return back();
@@ -79,7 +79,7 @@ class FinanceBillController extends Controller
             $bill->update(['next_due_date' => $bill->nextDateAfterPayment()->toDateString()]);
         });
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Tagihan berhasil ditandai sudah dibayar.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Bill marked as paid successfully.']);
 
         return back();
     }

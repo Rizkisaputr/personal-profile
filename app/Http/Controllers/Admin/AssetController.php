@@ -35,7 +35,7 @@ class AssetController extends Controller
     {
         Asset::create($this->validated($request));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Aset berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Asset added successfully.']);
 
         return to_route('admin.assets.index');
     }
@@ -44,7 +44,7 @@ class AssetController extends Controller
     {
         $asset->update($this->validated($request));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Aset berhasil diperbarui.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Asset updated successfully.']);
 
         return to_route('admin.assets.index');
     }
@@ -53,7 +53,7 @@ class AssetController extends Controller
     {
         $asset->delete();
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Aset berhasil dihapus.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Asset deleted successfully.']);
 
         return back();
     }

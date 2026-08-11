@@ -41,7 +41,7 @@ class SubscriptionController extends Controller
     {
         Subscription::create($this->validated($request));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Langganan berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Subscription added successfully.']);
 
         return to_route('admin.subscriptions.index');
     }
@@ -50,7 +50,7 @@ class SubscriptionController extends Controller
     {
         $subscription->update($this->validated($request));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Langganan berhasil diperbarui.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Subscription updated successfully.']);
 
         return to_route('admin.subscriptions.index');
     }
@@ -62,7 +62,7 @@ class SubscriptionController extends Controller
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $deactivated ? 'Langganan berhasil dinonaktifkan.' : 'Langganan berhasil dihapus.',
+            'message' => $deactivated ? 'Subscription deactivated successfully.' : 'Subscription deleted successfully.',
         ]);
 
         return back();
@@ -90,7 +90,7 @@ class SubscriptionController extends Controller
             $subscription->update(['next_renewal_date' => $subscription->nextDateAfterPayment()->toDateString()]);
         });
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Pembayaran langganan berhasil dicatat.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Subscription payment recorded successfully.']);
 
         return back();
     }

@@ -18,19 +18,19 @@ type A = {
 };
 const props = defineProps<{ asset?: A; categories: string[] }>();
 const statusLabels: Record<string, string> = {
-    active: 'Aktif',
-    sold: 'Terjual',
-    lost: 'Hilang',
-    disposed: 'Dihapuskan',
+    active: 'Active',
+    sold: 'Sold',
+    lost: 'Lost',
+    disposed: 'Disposed',
 };
 const categoryLabels: Record<string, string> = {
-    Computer: 'Komputer',
-    Phone: 'Ponsel',
-    Vehicle: 'Kendaraan',
-    Electronics: 'Elektronik',
-    Property: 'Properti',
+    Computer: 'Computer',
+    Phone: 'Phone',
+    Vehicle: 'Vehicle',
+    Electronics: 'Electronics',
+    Property: 'Property',
     Digital: 'Digital',
-    Other: 'Lainnya',
+    Other: 'Other',
 };
 const form = useForm({
     name: props.asset?.name ?? '',
@@ -44,10 +44,10 @@ const form = useForm({
 });
 function submit() {
     if (props.asset) {
-form.put(`/admin/assets/${props.asset.id}`);
-} else {
-form.post('/admin/assets');
-}
+        form.put(`/admin/assets/${props.asset.id}`);
+    } else {
+        form.post('/admin/assets');
+    }
 }
 </script>
 <template>
@@ -61,10 +61,10 @@ form.post('/admin/assets');
         @submit.prevent="submit"
     >
         <label class="grid gap-2 text-sm"
-            >Nama Aset<Input v-model="form.name" />
+            >Asset Name<Input v-model="form.name" />
             <InputError :message="form.errors.name" /></label
         ><label class="grid gap-2 text-sm"
-            >Kategori<select
+            >Category<select
                 v-model="form.category"
                 class="h-10 rounded-md border bg-background px-3"
             >
@@ -74,22 +74,26 @@ form.post('/admin/assets');
                     :value="category"
                 >
                     {{ categoryLabels[category] ?? category }}
-                </option>
-            </select><InputError :message="form.errors.category" /></label
+                </option></select
+            ><InputError :message="form.errors.category" /></label
         ><label class="grid gap-2 text-sm"
-            >Harga Beli<CurrencyInput
+            >Purchase Price<CurrencyInput
                 v-model="form.purchase_price"
-                placeholder="Contoh: 1.500.000" /><InputError :message="form.errors.purchase_price" /></label
+                placeholder="Example: 1,500,000" /><InputError
+                :message="form.errors.purchase_price" /></label
         ><label class="grid gap-2 text-sm"
-            >Tanggal Pembelian<Input
+            >Purchase Date<Input
                 v-model="form.purchase_date"
-                type="date" /><InputError :message="form.errors.purchase_date" /></label
+                type="date" /><InputError
+                :message="form.errors.purchase_date" /></label
         ><label class="grid gap-2 text-sm"
-            >Garansi Berakhir<Input
+            >Warranty Expiration<Input
                 v-model="form.warranty_expiry"
-                type="date" /><InputError :message="form.errors.warranty_expiry" /></label
+                type="date" /><InputError
+                :message="form.errors.warranty_expiry" /></label
         ><label class="grid gap-2 text-sm"
-            >Nomor Seri<Input v-model="form.serial_number" /><InputError :message="form.errors.serial_number" /></label
+            >Serial Number<Input v-model="form.serial_number" /><InputError
+                :message="form.errors.serial_number" /></label
         ><label class="grid gap-2 text-sm"
             >Status<select
                 v-model="form.status"
@@ -101,10 +105,10 @@ form.post('/admin/assets');
                     :value="status"
                 >
                     {{ statusLabels[status] }}
-                </option>
-            </select><InputError :message="form.errors.status" /></label
+                </option></select
+            ><InputError :message="form.errors.status" /></label
         ><label class="grid gap-2 text-sm md:col-span-2"
-            >Catatan<textarea
+            >Notes<textarea
                 v-model="form.notes"
                 class="min-h-24 rounded-md border bg-background p-3"
             />
@@ -112,7 +116,7 @@ form.post('/admin/assets');
         </label>
         <div class="flex gap-3 md:col-span-2">
             <Button type="submit" :disabled="form.processing">{{
-                form.processing ? 'Menyimpan…' : 'Simpan'
+                form.processing ? 'Saving…' : 'Save'
             }}</Button
             ><Link
                 href="/admin/assets"

@@ -97,7 +97,7 @@ const entry = useForm({
                     max="12"
                 /><CurrencyInput
                     v-model="target.target_amount"
-                    placeholder="Contoh: 1.000.000"
+                    placeholder="Example: 1,000,000"
                 /><Button>Save target</Button>
             </div>
         </form>
@@ -109,14 +109,14 @@ const entry = useForm({
                 })
             "
         >
-            <h2 class="font-semibold">Tambah / Ambil Tabungan</h2>
+            <h2 class="font-semibold">Add / Withdraw Savings</h2>
             <p class="mt-1 text-xs leading-5 text-muted-foreground">
-                Catat dana yang ditambahkan ke target atau diambil dari tabungan.
+                Record funds contributed to the goal or withdrawn from savings.
             </p>
             <div class="mt-4 grid gap-4">
                 <FormField
                     id="entry_type"
-                    label="Jenis Transaksi"
+                    label="Transaction Type"
                     :error="entry.errors.type"
                     required
                 >
@@ -125,8 +125,8 @@ const entry = useForm({
                         v-model="entry.type"
                         class="h-10 rounded-md border bg-background px-3"
                     >
-                        <option value="contribution">Tambah Tabungan</option>
-                        <option value="withdrawal">Ambil Tabungan</option>
+                        <option value="contribution">Add Savings</option>
+                        <option value="withdrawal">Withdraw Savings</option>
                     </select>
                 </FormField>
                 <FormField
@@ -138,12 +138,12 @@ const entry = useForm({
                     <CurrencyInput
                         id="entry_amount"
                         v-model="entry.amount"
-                        placeholder="Contoh: 500.000"
+                        placeholder="Example: 500,000"
                     />
                 </FormField>
                 <FormField
                     id="entry_date"
-                    label="Tanggal"
+                    label="Date"
                     :error="entry.errors.entry_date"
                     required
                 >
@@ -155,7 +155,7 @@ const entry = useForm({
                 </FormField>
                 <FormField
                     id="entry_account"
-                    label="Rekening"
+                    label="Account"
                     :error="entry.errors.account_id"
                     required
                 >
@@ -164,35 +164,31 @@ const entry = useForm({
                         v-model="entry.account_id"
                         class="h-10 rounded-md border bg-background px-3"
                     >
-                        <option value="">Pilih rekening</option>
-                        <option
-                            v-for="a in accounts"
-                            :key="a.id"
-                            :value="a.id"
-                        >
+                        <option value="">Select account</option>
+                        <option v-for="a in accounts" :key="a.id" :value="a.id">
                             {{ a.name }}
                         </option>
                     </select>
                 </FormField>
                 <FormField
                     id="entry_notes"
-                    label="Catatan"
+                    label="Notes"
                     :error="entry.errors.notes"
                 >
                     <FormTextarea
                         id="entry_notes"
                         v-model="entry.notes"
                         :rows="3"
-                        placeholder="Masukkan catatan"
+                        placeholder="Enter notes"
                     />
                 </FormField>
                 <Button type="submit" :disabled="entry.processing">
                     {{
                         entry.processing
-                            ? 'Menyimpan…'
+                            ? 'Saving…'
                             : entry.type === 'contribution'
-                              ? 'Tambah Tabungan'
-                              : 'Ambil Tabungan'
+                              ? 'Add Savings'
+                              : 'Withdraw Savings'
                     }}
                 </Button>
             </div>
@@ -208,12 +204,12 @@ const entry = useForm({
             <span class="capitalize">{{ e.type }} · {{ e.account.name }}</span
             ><span
                 >{{ formatIDR(e.amount) }} ·
-                {{ new Date(e.entry_date).toLocaleDateString('id-ID') }}</span
+                {{ new Date(e.entry_date).toLocaleDateString('en-US') }}</span
             >
         </div>
         <p class="mt-5 text-sm text-muted-foreground">
-            Kekurangan target bulan sebelumnya:
-            {{ formatIDR(goal.previous_month.shortfall) }}. Nilai ini tidak
+            Previous month's target shortfall:
+            {{ formatIDR(goal.previous_month.shortfall) }}. This amount is not
             dipindahkan secara otomatis.
         </p>
     </div>

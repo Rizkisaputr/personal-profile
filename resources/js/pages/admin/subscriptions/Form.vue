@@ -34,10 +34,10 @@ const form = useForm({
 });
 function submit() {
     if (props.subscription) {
-form.put(`/admin/subscriptions/${props.subscription.id}`);
-} else {
-form.post('/admin/subscriptions');
-}
+        form.put(`/admin/subscriptions/${props.subscription.id}`);
+    } else {
+        form.post('/admin/subscriptions');
+    }
 }
 </script>
 <template>
@@ -53,7 +53,9 @@ form.post('/admin/subscriptions');
         <label class="grid gap-2 text-sm"
             >Service name<Input v-model="form.service_name" /></label
         ><label class="grid gap-2 text-sm"
-            >Cost<CurrencyInput v-model="form.cost" placeholder="Contoh: 150.000" /></label
+            >Cost<CurrencyInput
+                v-model="form.cost"
+                placeholder="Example: 150,000" /></label
         ><label class="grid gap-2 text-sm"
             >Billing cycle<select
                 v-model="form.billing_cycle"

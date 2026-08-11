@@ -38,7 +38,7 @@ class DocumentController extends Controller
         $this->storeFile($request, $data);
         Document::create($data);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Berkas berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Document added successfully.']);
 
         return to_route('admin.documents.index');
     }
@@ -57,7 +57,7 @@ class DocumentController extends Controller
             $document->update($data);
         }
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Berkas berhasil diperbarui.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Document updated successfully.']);
 
         return to_route('admin.documents.index');
     }
@@ -69,7 +69,7 @@ class DocumentController extends Controller
         }
         $document->delete();
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Berkas berhasil dihapus.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Document deleted successfully.']);
 
         return back();
     }

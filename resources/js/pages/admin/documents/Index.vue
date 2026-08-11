@@ -15,8 +15,8 @@ type Document = {
 defineProps<{ documents: Document[] }>();
 function removeDocument(id: number): void {
     if (window.confirm('Delete this document?')) {
-router.delete(`/admin/documents/${id}`);
-}
+        router.delete(`/admin/documents/${id}`);
+    }
 }
 </script>
 <template>
@@ -57,7 +57,7 @@ router.delete(`/admin/documents/${id}`);
                         {{
                             item.expiry_date
                                 ? new Date(item.expiry_date).toLocaleDateString(
-                                      'id-ID',
+                                      'en-US',
                                   )
                                 : '—'
                         }}
@@ -101,7 +101,7 @@ router.delete(`/admin/documents/${id}`);
                                 >Edit</Link
                             ><button
                                 class="text-xs text-destructive"
-                            @click="removeDocument(item.id)"
+                                @click="removeDocument(item.id)"
                             >
                                 Delete
                             </button>

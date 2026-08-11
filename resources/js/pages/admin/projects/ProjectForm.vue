@@ -115,9 +115,9 @@ onBeforeUnmount(() => {
     <form class="mt-8 space-y-6" @submit.prevent="submit">
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-7">
-                <h2 class="text-base font-semibold">Informasi Dasar</h2>
+                <h2 class="text-base font-semibold">Basic Information</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Identitas dan ringkasan utama yang ditampilkan pada daftar proyek.
+                    The identity and main summary displayed in the project list.
                 </p>
             </div>
             <div class="grid gap-6 md:grid-cols-2">
@@ -202,8 +202,8 @@ onBeforeUnmount(() => {
             <div class="mb-7">
                 <h2 class="text-base font-semibold">Studi Kasus</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Gunakan heading yang jelas seperti Ringkasan Proyek, Masalah,
-                    Peran Saya, Solusi, Fitur Utama, dan Hasil atau Dampak.
+                    Use clear headings such as Project Summary, Problem, My
+                    Role, Solution, Key Features, and Results or Impact.
                 </p>
             </div>
             <FormField
@@ -220,9 +220,10 @@ onBeforeUnmount(() => {
 
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-7">
-                <h2 class="text-base font-semibold">Tautan dan Teknologi</h2>
+                <h2 class="text-base font-semibold">Links and Technologies</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Hubungkan proyek dengan implementasi dan tujuan eksternalnya.
+                    Connect the project to its implementation and external
+                    destinations.
                 </p>
             </div>
             <div class="grid gap-6 md:grid-cols-2">
@@ -243,7 +244,7 @@ onBeforeUnmount(() => {
                 /></FormField>
                 <div class="md:col-span-2">
                     <span class="mb-3 block text-sm font-medium"
-                        >Teknologi</span
+                        >Technologies</span
                     >
                     <div
                         v-if="technologies.length"
@@ -266,8 +267,8 @@ onBeforeUnmount(() => {
                         </label>
                     </div>
                     <p v-else class="text-sm text-muted-foreground">
-                        Tambahkan teknologi terlebih dahulu untuk menghubungkannya
-                        ke proyek ini.
+                        Add technologies first to associate them with this
+                        project.
                     </p>
                     <p
                         v-if="form.errors.technology_ids"
@@ -283,7 +284,8 @@ onBeforeUnmount(() => {
             <div class="mb-7">
                 <h2 class="text-base font-semibold">Media</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Gambar utama yang kuat dan galeri ringkas mendukung studi kasus.
+                    A strong hero image and concise gallery support the case
+                    study.
                 </p>
             </div>
             <div class="grid gap-8 lg:grid-cols-2">
@@ -294,14 +296,14 @@ onBeforeUnmount(() => {
                         <img
                             v-if="thumbnailPreview"
                             :src="thumbnailPreview"
-                            alt="Pratinjau gambar utama"
+                            alt="Hero image preview"
                             class="h-full w-full object-cover"
                         />
                         <div
                             v-else
                             class="grid h-full place-items-center text-sm text-muted-foreground"
                         >
-                            Belum ada gambar utama
+                            No hero image yet
                         </div>
                     </div>
                     <FileUploadField
@@ -316,16 +318,16 @@ onBeforeUnmount(() => {
                 </div>
                 <div>
                     <label for="gallery_images" class="text-sm font-medium"
-                        >Tambah Gambar Galeri</label
+                        >Add Gallery Images</label
                     >
                     <label
                         for="gallery_images"
                         class="mt-2 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-input bg-background-alt p-4"
                         ><ImagePlus class="size-5 text-muted-foreground" /><span
                             ><span class="block text-sm font-medium"
-                                >Pilih beberapa gambar</span
+                                >Select multiple images</span
                             ><span class="text-xs text-muted-foreground"
-                                >Maksimal 6 MB per gambar</span
+                                >Maximum 6 MB per image</span
                             ></span
                         ><input
                             id="gallery_images"
@@ -361,12 +363,12 @@ onBeforeUnmount(() => {
                     <div class="mt-3 grid gap-3 sm:grid-cols-[1fr_6rem]">
                         <Input
                             v-model="form.gallery_captions[index]"
-                            :aria-label="`Keterangan gambar ${index + 1}`"
-                                placeholder="Keterangan opsional"
+                            :aria-label="`Caption for image ${index + 1}`"
+                            placeholder="Optional caption"
                         /><Input
                             v-model="form.gallery_sort_orders[index]"
                             type="number"
-                            :aria-label="`Urutan gambar ${index + 1}`"
+                            :aria-label="`Order for image ${index + 1}`"
                         />
                     </div>
                 </div>
@@ -385,19 +387,19 @@ onBeforeUnmount(() => {
                     >
                         <img
                             :src="image.url"
-                            :alt="image.caption || 'Gambar galeri proyek'"
+                            :alt="image.caption || 'Project gallery image'"
                             class="aspect-video w-full rounded-lg object-cover"
                         />
                         <div class="mt-3 grid gap-3 sm:grid-cols-[1fr_6rem]">
                             <Input
                                 v-model="form.existing_images[image.id].caption"
-                                :aria-label="`Keterangan untuk ${image.id}`"
+                                :aria-label="`Caption for ${image.id}`"
                             /><Input
                                 v-model="
                                     form.existing_images[image.id].sort_order
                                 "
                                 type="number"
-                                :aria-label="`Urutan untuk ${image.id}`"
+                                :aria-label="`Order for ${image.id}`"
                             />
                         </div>
                         <div class="mt-2 flex justify-end">
@@ -413,9 +415,9 @@ onBeforeUnmount(() => {
 
         <section class="surface-panel p-5 sm:p-8">
             <div class="mb-7">
-                <h2 class="text-base font-semibold">Publikasi dan SEO</h2>
+                <h2 class="text-base font-semibold">Publishing and SEO</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Atur prioritas, visibilitas, dan tampilan pencarian.
+                    Configure priority, visibility, and search presentation.
                 </p>
             </div>
             <div class="grid gap-4 md:grid-cols-2">

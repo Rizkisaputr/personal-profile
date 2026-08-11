@@ -33,7 +33,7 @@ class FinanceDebtController extends Controller
     {
         $d = FinanceDebt::create($this->validated($r));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Hutang atau piutang berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Debt or receivable added successfully.']);
 
         return to_route('admin.finance.debts.show', $d);
     }
@@ -54,7 +54,7 @@ class FinanceDebtController extends Controller
     {
         $debt->update($this->validated($r));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Hutang atau piutang berhasil diperbarui.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Debt or receivable updated successfully.']);
 
         return to_route('admin.finance.debts.show', $debt);
     }
@@ -66,7 +66,7 @@ class FinanceDebtController extends Controller
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $cancelled ? 'Hutang atau piutang berhasil dibatalkan.' : 'Hutang atau piutang berhasil dihapus.',
+            'message' => $cancelled ? 'Debt or receivable cancelled successfully.' : 'Debt or receivable deleted successfully.',
         ]);
 
         return to_route('admin.finance.debts.index');
@@ -77,7 +77,7 @@ class FinanceDebtController extends Controller
         $v = $r->validate(['due_date' => ['required', 'date'], 'amount' => ['required', 'decimal:0,2', 'gt:0'], 'notes' => ['nullable', 'string']]);
         $debt->schedules()->create($v);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Jadwal pembayaran berhasil ditambahkan.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Payment schedule added successfully.']);
 
         return back();
     }
@@ -106,7 +106,7 @@ class FinanceDebtController extends Controller
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $debt->type === 'debt' ? 'Pembayaran hutang berhasil dicatat.' : 'Pembayaran piutang berhasil diterima.',
+            'message' => $debt->type === 'debt' ? 'Debt payment recorded successfully.' : 'Receivable payment received successfully.',
         ]);
 
         return back();

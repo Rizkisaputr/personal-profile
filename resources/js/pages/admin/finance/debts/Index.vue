@@ -65,7 +65,7 @@ defineProps<{ debts: D[] }>();
                             d.next_due
                                 ? new Date(
                                       d.next_due.due_date,
-                                  ).toLocaleDateString('id-ID')
+                                  ).toLocaleDateString('en-US')
                                 : '—'
                         }}
                     </td>

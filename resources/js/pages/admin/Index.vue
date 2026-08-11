@@ -86,23 +86,23 @@ const page = usePage();
 const identity = page.props.profileIdentity;
 const moneyCards = computed(() => [
     {
-        label: 'Total Saldo',
+        label: 'Total Balance',
         value: props.financeSummary.total_balance,
         icon: WalletCards,
     },
     {
-        label: 'Pemasukan Bulan Ini',
+        label: 'Income This Month',
         value: props.financeSummary.income,
         icon: ArrowUpRight,
     },
     {
-        label: 'Pengeluaran Bulan Ini',
+        label: 'Expenses This Month',
         value: props.financeSummary.expense,
         icon: ArrowDownRight,
     },
-    { label: 'Tabungan', value: props.financeSummary.savings, icon: PiggyBank },
+    { label: 'Savings', value: props.financeSummary.savings, icon: PiggyBank },
     {
-        label: 'Sisa Hutang',
+        label: 'Outstanding Debt',
         value: props.financeSummary.remaining_debt,
         icon: CircleDollarSign,
     },
@@ -157,7 +157,7 @@ function firstName() {
     return (identity?.name || page.props.auth.user.name).split(/\s+/)[0];
 }
 function date(value: string) {
-    return new Intl.DateTimeFormat('id-ID', {
+    return new Intl.DateTimeFormat('en-US', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
@@ -165,20 +165,18 @@ function date(value: string) {
 }
 function alertTiming(item: Alert) {
     if (item.days < 0) {
-        return `terlambat ${Math.abs(item.days)} hari`;
+        return `${Math.abs(item.days)} days overdue`;
     }
 
     if (item.days === 0) {
-        return item.type === 'document'
-            ? 'kedaluwarsa hari ini'
-            : 'jatuh tempo hari ini';
+        return item.type === 'document' ? 'expires today' : 'due today';
     }
 
-    return `dalam ${item.days} hari`;
+    return `in ${item.days} days`;
 }
 function accountName(item: Transaction) {
     if (item.type === 'transfer') {
-        return `${item.from_account?.name || 'Rekening'} → ${item.to_account?.name || 'Rekening'}`;
+        return `${item.from_account?.name || 'Account'} → ${item.to_account?.name || 'Account'}`;
     }
 
     return item.account?.name || '—';
@@ -186,7 +184,7 @@ function accountName(item: Transaction) {
 
 function severityLabel(severity: Alert['severity']): string {
     return {
-        info: 'Informasi',
+        info: 'Information',
         warning: 'Perhatian',
         urgent: 'Penting',
     }[severity];
@@ -195,16 +193,16 @@ function severityLabel(severity: Alert['severity']): string {
 function paymentTypeLabel(type: string): string {
     return (
         {
-            debt: 'Hutang',
-            bill: 'Tagihan',
-            subscription: 'Langganan',
+            debt: 'Debt',
+            bill: 'Bill',
+            subscription: 'Subscription',
         }[type] || type
     );
 }
 </script>
 
 <template>
-    <Head title="Pusat Kendali Pribadi" />
+    <Head title="Personal Dashboard" />
     <header class="flex items-center gap-4">
         <ProfileAvatar
             class="size-14"
@@ -216,14 +214,14 @@ function paymentTypeLabel(type: string): string {
                 {{ greeting() }}, {{ firstName() }}
             </h1>
             <p class="mt-1 text-sm text-muted-foreground">
-                Berikut ringkasan kondisi Anda hari ini.
+                Here is an overview of your current status today.
             </p>
         </div>
     </header>
 
     <section class="mt-8">
         <div class="mb-4">
-            <p class="editorial-kicker">Keuangan</p>
+            <p class="editorial-kicker">Finance</p>
         </div>
         <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
             <article
@@ -250,10 +248,10 @@ function paymentTypeLabel(type: string): string {
     <section class="mt-6 grid gap-6 xl:grid-cols-[1.6fr_1fr]">
         <article class="surface-panel p-5 sm:p-6">
             <div>
-                <h2 class="font-semibold">Arus Kas — 6 Bulan Terakhir</h2>
+                <h2 class="font-semibold">Cash Flow — Last 6 Months</h2>
                 <p class="mt-1 text-xs text-muted-foreground">
-                    Hanya pemasukan dan pengeluaran; transfer serta penyesuaian
-                    tidak dihitung.
+                    Income and expenses only; transfers and adjustments are
+                    excluded.
                 </p>
             </div>
             <div
@@ -275,14 +273,14 @@ function paymentTypeLabel(type: string): string {
                             :style="{
                                 height: `${Math.max(2, (Number(item.income) / chartMax) * 100)}%`,
                             }"
-                            :title="`Pemasukan ${formatIDR(item.income)}`"
+                            :title="`Income ${formatIDR(item.income)}`"
                         />
                         <div
                             class="w-2/5 rounded-t bg-rose-400/80"
                             :style="{
                                 height: `${Math.max(2, (Number(item.expense) / chartMax) * 100)}%`,
                             }"
-                            :title="`Pengeluaran ${formatIDR(item.expense)}`"
+                            :title="`Expenses ${formatIDR(item.expense)}`"
                         />
                     </div>
                     <p class="py-3 text-center text-xs text-muted-foreground">
@@ -294,23 +292,21 @@ function paymentTypeLabel(type: string): string {
                 v-else
                 class="grid h-64 place-items-center text-sm text-muted-foreground"
             >
-                Belum ada data arus kas dalam enam bulan terakhir.
+                No cash flow data is available for the last six months.
             </p>
             <div class="mt-3 flex gap-4 text-xs text-muted-foreground">
                 <span class="flex items-center gap-2"
                     ><i
                         class="size-2 rounded-full bg-emerald-500"
-                    />Pemasukan</span
+                    />Income</span
                 ><span class="flex items-center gap-2"
-                    ><i
-                        class="size-2 rounded-full bg-rose-400"
-                    />Pengeluaran</span
+                    ><i class="size-2 rounded-full bg-rose-400" />Expenses</span
                 >
             </div>
         </article>
         <article class="surface-panel p-5 sm:p-6">
-            <h2 class="font-semibold">Pengeluaran Berdasarkan Kategori</h2>
-            <p class="mt-1 text-xs text-muted-foreground">Bulan berjalan</p>
+            <h2 class="font-semibold">Expenses by Category</h2>
+            <p class="mt-1 text-xs text-muted-foreground">Current month</p>
             <div
                 v-if="expenseBreakdown.length"
                 class="mt-6 flex flex-col items-center gap-6 sm:flex-row sm:items-start xl:flex-col xl:items-center"
@@ -327,9 +323,7 @@ function paymentTypeLabel(type: string): string {
                         ><strong
                             class="mt-0.5 max-w-full text-[11px] leading-4 font-semibold whitespace-nowrap tabular-nums"
                             :title="formatIDR(expenseTotal)"
-                            >{{
-                            formatIDR(expenseTotal)
-                        }}</strong
+                            >{{ formatIDR(expenseTotal) }}</strong
                         >
                     </div>
                 </div>
@@ -352,9 +346,7 @@ function paymentTypeLabel(type: string): string {
                             }}</span></span
                         ><span
                             class="shrink-0 text-right font-medium whitespace-nowrap tabular-nums"
-                            >{{
-                            formatIDR(item.amount)
-                        }}</span
+                            >{{ formatIDR(item.amount) }}</span
                         >
                     </div>
                 </div>
@@ -363,13 +355,13 @@ function paymentTypeLabel(type: string): string {
                 v-else
                 class="grid h-64 place-items-center text-sm text-muted-foreground"
             >
-                Belum ada pengeluaran bulan ini.
+                No expenses this month.
             </p>
         </article>
     </section>
 
     <section class="mt-6">
-        <h2 class="mb-4 text-lg font-semibold">Progres Tabungan</h2>
+        <h2 class="mb-4 text-lg font-semibold">Savings Progress</h2>
         <div v-if="savingsGoals.length" class="grid gap-4 lg:grid-cols-2">
             <article
                 v-for="goal in savingsGoals"
@@ -397,7 +389,7 @@ function paymentTypeLabel(type: string): string {
                     />
                 </div>
                 <div class="mt-5 flex justify-between text-xs">
-                    <span class="text-muted-foreground">Bulan berjalan</span
+                    <span class="text-muted-foreground">Current month</span
                     ><span
                         >{{ formatIDR(goal.month.actual) }} /
                         {{ formatIDR(goal.month.target) }} ·
@@ -414,9 +406,9 @@ function paymentTypeLabel(type: string): string {
                     v-if="Number(goal.previous_month.shortfall) > 0"
                     class="mt-3 text-xs text-amber-700"
                 >
-                    Kekurangan target bulan sebelumnya:
-                    {{ formatIDR(goal.previous_month.shortfall) }}. Tidak dibawa
-                    ke bulan ini.
+                    Previous month's target shortfall:
+                    {{ formatIDR(goal.previous_month.shortfall) }}. It is not
+                    carried into this month.
                 </p>
             </article>
         </div>
@@ -424,14 +416,14 @@ function paymentTypeLabel(type: string): string {
             v-else
             class="surface-panel p-8 text-center text-sm text-muted-foreground"
         >
-            Belum ada target tabungan aktif.
+            No active savings goals yet.
         </p>
     </section>
 
     <section class="mt-6">
         <div class="mb-4 flex items-center gap-2">
             <AlertTriangle class="size-5" />
-            <h2 class="text-lg font-semibold">Informasi Penting</h2>
+            <h2 class="text-lg font-semibold">Important Information</h2>
         </div>
         <div
             v-if="alerts.length"
@@ -460,11 +452,7 @@ function paymentTypeLabel(type: string): string {
                         >
                     </p>
                     <p class="mt-1 text-xs text-muted-foreground">
-                        {{
-                            item.type === 'document'
-                                ? 'Kedaluwarsa'
-                                : 'Jatuh tempo'
-                        }}
+                        {{ item.type === 'document' ? 'Expires' : 'Due date' }}
                         {{ date(item.due_date) }} · {{ alertTiming(item) }}
                     </p>
                 </div>
@@ -485,19 +473,19 @@ function paymentTypeLabel(type: string): string {
             v-else
             class="surface-panel p-8 text-center text-sm text-muted-foreground"
         >
-            Tidak ada hal yang memerlukan perhatian dalam 30 hari ke depan.
+            Nothing requires attention in the next 30 days.
         </p>
     </section>
 
     <section class="mt-6">
         <div class="mb-4 flex items-center gap-2">
             <FolderKanban class="size-5" />
-            <h2 class="text-lg font-semibold">Ringkasan Portofolio</h2>
+            <h2 class="text-lg font-semibold">Portfolio Overview</h2>
         </div>
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-5">
             <article
                 v-for="item in [
-                    { label: 'Total Proyek', value: portfolioSummary.total },
+                    { label: 'Total Projects', value: portfolioSummary.total },
                     { label: 'Menunggu', value: portfolioSummary.waiting },
                     { label: 'Berjalan', value: portfolioSummary.running },
                     { label: 'Ditunda', value: portfolioSummary.on_hold },
@@ -515,7 +503,7 @@ function paymentTypeLabel(type: string): string {
     <section class="mt-6 grid gap-6 xl:grid-cols-2">
         <article class="surface-panel overflow-hidden">
             <div class="border-b p-5">
-                <h2 class="font-semibold">Transaksi Terbaru</h2>
+                <h2 class="font-semibold">Recent Transactions</h2>
             </div>
             <div v-if="recentTransactions.length" class="divide-y">
                 <div
@@ -553,13 +541,13 @@ function paymentTypeLabel(type: string): string {
                 </div>
             </div>
             <p v-else class="p-8 text-center text-sm text-muted-foreground">
-                Belum ada transaksi.
+                No transactions yet.
             </p>
         </article>
         <article class="surface-panel overflow-hidden">
             <div class="flex items-center gap-2 border-b p-5">
                 <Clock3 class="size-4" />
-                <h2 class="font-semibold">Pembayaran Mendatang</h2>
+                <h2 class="font-semibold">Upcoming Payments</h2>
             </div>
             <div v-if="upcomingPayments.length" class="divide-y">
                 <Link
@@ -582,7 +570,7 @@ function paymentTypeLabel(type: string): string {
                 >
             </div>
             <p v-else class="p-8 text-center text-sm text-muted-foreground">
-                Belum ada pembayaran mendatang.
+                No upcoming payments.
             </p>
         </article>
     </section>
