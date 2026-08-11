@@ -3,7 +3,14 @@ import { Head, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import type { PublicSettings, SeoData } from '@/types';
 
-defineProps<{ seo: SeoData; type?: 'website' | 'article' }>();
+withDefaults(
+    defineProps<{
+        seo: SeoData;
+        browserTitle?: string;
+        type?: 'website' | 'article';
+    }>(),
+    { browserTitle: undefined, type: 'website' },
+);
 
 const page = usePage();
 const favicon = computed(
@@ -12,7 +19,7 @@ const favicon = computed(
 </script>
 
 <template>
-    <Head :title="seo.title">
+    <Head :title="browserTitle ?? seo.title">
         <link v-if="favicon" head-key="favicon" rel="icon" :href="favicon" />
         <meta
             v-if="seo.description"
@@ -31,7 +38,7 @@ const favicon = computed(
         <meta
             head-key="og:type"
             property="og:type"
-            :content="type ?? 'website'"
+            :content="type"
         />
         <meta head-key="og:url" property="og:url" :content="seo.canonical" />
         <meta

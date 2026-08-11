@@ -28,7 +28,7 @@ const visibleProjects = computed(() =>
 </script>
 
 <template>
-    <SeoHead :seo="seo" />
+    <SeoHead :seo="seo" browser-title="Projects" />
     <header class="content-container py-10 sm:py-12 lg:py-14">
         <MotionReveal
             ><p class="editorial-kicker mb-3">Portfolio</p>

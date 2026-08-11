@@ -48,7 +48,7 @@ const year = (date: string | null): string =>
 </script>
 
 <template>
-    <SeoHead :seo="seo" type="article" />
+    <SeoHead :seo="seo" :browser-title="project.title" type="article" />
 
     <article>
         <header

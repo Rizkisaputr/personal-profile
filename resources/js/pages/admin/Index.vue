@@ -146,12 +146,12 @@ function greeting() {
     const hour = new Date().getHours();
 
     return hour < 11
-        ? 'Selamat pagi'
+        ? 'Good morning'
         : hour < 15
-          ? 'Selamat siang'
+          ? 'Good afternoon'
           : hour < 18
-            ? 'Selamat sore'
-            : 'Selamat malam';
+            ? 'Good afternoon'
+            : 'Good evening';
 }
 function firstName() {
     return (identity?.name || page.props.auth.user.name).split(/\s+/)[0];
@@ -202,7 +202,7 @@ function paymentTypeLabel(type: string): string {
 </script>
 
 <template>
-    <Head title="Personal Dashboard" />
+    <Head title="Dasbor" />
     <header class="flex items-center gap-4">
         <ProfileAvatar
             class="size-14"

@@ -30,7 +30,7 @@ function amount(transaction: FinanceTransaction): string {
 }
 </script>
 <template>
-    <Head title="Finance overview" /><PageHeader
+    <Head title="Keuangan" /><PageHeader
         eyebrow="Personal"
         title="Finance overview"
         description="A private snapshot of your manually managed accounts and cash flow."

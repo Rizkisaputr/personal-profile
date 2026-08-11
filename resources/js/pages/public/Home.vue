@@ -81,7 +81,7 @@ const trainingPeriod = (
 </script>
 
 <template>
-    <SeoHead :seo="seo" />
+    <SeoHead :seo="seo" browser-title="Rizki Saputra" />
 
     <section id="home" class="scroll-mt-2 overflow-hidden bg-white">
         <div

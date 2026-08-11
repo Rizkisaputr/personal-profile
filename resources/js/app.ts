@@ -8,14 +8,19 @@ import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { initializeFlashToast } from '@/lib/flashToast';
 import { initializeUiLocalization, translateUi } from '@/lib/uiLocalization';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = 'Rizki Saputra';
 
 createInertiaApp({
     title: (title) => {
-        const pageTitle =
-            window.location.pathname === '/login' ? title : translateUi(title);
+        const pageTitle = title ? translateUi(title).trim() : '';
 
-        return pageTitle ? `${pageTitle} - ${appName}` : appName;
+        if (!pageTitle || pageTitle === appName) {
+            return appName;
+        }
+
+        return pageTitle.endsWith(`| ${appName}`)
+            ? pageTitle
+            : `${pageTitle} | ${appName}`;
     },
     layout: (name) => {
         switch (true) {

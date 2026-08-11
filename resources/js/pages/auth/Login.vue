@@ -19,7 +19,7 @@ defineProps<{ status?: string }>();
 </script>
 
 <template>
-    <Head title="Log in" />
+    <Head title="Login" />
 
     <div
         v-if="status"
