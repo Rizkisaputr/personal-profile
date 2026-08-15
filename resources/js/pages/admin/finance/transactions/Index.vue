@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Head, Link, router } from '@inertiajs/vue3';
 import { Plus, Search } from '@lucide/vue';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+import ConfirmDelete from '@/components/admin/ConfirmDelete.vue';
 import PageHeader from '@/components/admin/PageHeader.vue';
 import { buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -32,6 +33,16 @@ const filters = reactive({
     category: props.filters.category || '',
     search: props.filters.search || '',
 });
+const deleting = ref<number | null>(null);
+
+function remove(item: FinanceTransaction): void {
+    deleting.value = item.id;
+    router.delete(`/admin/finance/transactions/${item.id}`, {
+        preserveScroll: true,
+        onFinish: () => (deleting.value = null),
+    });
+}
+
 function applyFilters(): void {
     router.get('/admin/finance/transactions', filters, {
         preserveState: true,
@@ -151,12 +162,13 @@ function amountLabel(item: FinanceTransaction): string {
                     <th class="px-5 py-3 font-medium">Account</th>
                     <th class="px-5 py-3 font-medium">Type</th>
                     <th class="px-5 py-3 text-right font-medium">Amount</th>
+                    <th class="px-5 py-3 text-right font-medium">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-if="!transactions.data.length">
                     <td
-                        colspan="6"
+                        colspan="7"
                         class="px-5 py-12 text-center text-muted-foreground"
                     >
                         No transactions found.
@@ -191,6 +203,14 @@ function amountLabel(item: FinanceTransaction): string {
                         :class="amountClass(item)"
                     >
                         {{ amountLabel(item) }}
+                    </td>
+                    <td class="px-5 py-4 text-right">
+                        <ConfirmDelete
+                            title="Delete transaction?"
+                            description="This transaction will be permanently deleted and the account balance will be recalculated."
+                            :processing="deleting === item.id"
+                            @confirm="remove(item)"
+                        />
                     </td>
                 </tr>
             </tbody>

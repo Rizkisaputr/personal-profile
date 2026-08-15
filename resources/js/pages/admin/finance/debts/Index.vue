@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import ConfirmDelete from '@/components/admin/ConfirmDelete.vue';
 import PageHeader from '@/components/admin/PageHeader.vue';
 import { buttonVariants } from '@/components/ui/button';
 import { formatIDR } from '@/lib/money';
@@ -16,6 +18,15 @@ type D = {
     next_due: { due_date: string; amount: string } | null;
 };
 defineProps<{ debts: D[] }>();
+const deleting = ref<number | null>(null);
+
+function remove(debt: D): void {
+    deleting.value = debt.id;
+    router.delete(`/admin/finance/debts/${debt.id}`, {
+        preserveScroll: true,
+        onFinish: () => (deleting.value = null),
+    });
+}
 </script>
 <template>
     <Head title="Debts & Receivables" /><PageHeader
@@ -70,12 +81,25 @@ defineProps<{ debts: D[] }>();
                         }}
                     </td>
                     <td>{{ d.progress }}%</td>
-                    <td>
-                        <Link
-                            :href="`/admin/finance/debts/${d.id}`"
-                            class="text-primary"
-                            >Details</Link
-                        >
+                    <td class="p-4">
+                        <div class="flex justify-end gap-1">
+                            <Link
+                                :href="`/admin/finance/debts/${d.id}`"
+                                :class="
+                                    buttonVariants({
+                                        variant: 'ghost',
+                                        size: 'sm',
+                                    })
+                                "
+                                >Details</Link
+                            >
+                            <ConfirmDelete
+                                title="Delete debt or receivable?"
+                                description="This record, its schedules, payments, and related finance transactions will be permanently deleted."
+                                :processing="deleting === d.id"
+                                @confirm="remove(d)"
+                            />
+                        </div>
                     </td>
                 </tr>
                 <tr v-if="!debts.length">

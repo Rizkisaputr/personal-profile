@@ -79,6 +79,28 @@ class FinancePersonalModulesTest extends TestCase
         ])->assertSessionHasErrors('amount');
     }
 
+    public function test_admin_can_delete_debt_with_its_payments_and_transactions(): void
+    {
+        $account = $this->account('1000000.00');
+        $debt = FinanceDebt::create($this->debtPayload('debt', '500000.00'));
+
+        $this->actingAs($this->admin())->post("/admin/finance/debts/{$debt->id}/payments", [
+            'amount' => '250000.00', 'payment_date' => today()->toDateString(),
+            'account_id' => $account->id,
+        ])->assertRedirect();
+
+        $payment = $debt->payments()->firstOrFail();
+        $transactionId = $payment->finance_transaction_id;
+
+        $this->delete("/admin/finance/debts/{$debt->id}")
+            ->assertRedirect('/admin/finance/debts');
+
+        $this->assertDatabaseMissing('finance_debts', ['id' => $debt->id]);
+        $this->assertDatabaseMissing('finance_debt_payments', ['id' => $payment->id]);
+        $this->assertDatabaseMissing('finance_transactions', ['id' => $transactionId]);
+        $this->assertSame('1000000.00', app(FinanceBalanceService::class)->balance($account));
+    }
+
     public function test_partial_schedule_payment_does_not_mark_schedule_paid(): void
     {
         $debt = FinanceDebt::create($this->debtPayload('debt', '500000.00'));
@@ -91,6 +113,31 @@ class FinancePersonalModulesTest extends TestCase
         ])->assertRedirect();
 
         $this->assertSame('upcoming', $schedule->refresh()->status);
+    }
+
+    public function test_admin_can_delete_a_transaction_linked_to_a_debt_payment(): void
+    {
+        $account = $this->account('1000000.00');
+        $debt = FinanceDebt::create($this->debtPayload('debt', '250000.00'));
+        $schedule = $debt->schedules()->create([
+            'due_date' => today(), 'amount' => '250000.00', 'status' => 'upcoming',
+        ]);
+
+        $this->actingAs($this->admin())->post("/admin/finance/debts/{$debt->id}/payments", [
+            'amount' => '250000.00', 'payment_date' => today()->toDateString(),
+            'account_id' => $account->id, 'schedule_id' => $schedule->id,
+        ])->assertRedirect();
+
+        $payment = $debt->payments()->firstOrFail();
+        $transactionId = $payment->finance_transaction_id;
+
+        $this->delete("/admin/finance/transactions/{$transactionId}")->assertRedirect();
+
+        $this->assertDatabaseMissing('finance_debt_payments', ['id' => $payment->id]);
+        $this->assertDatabaseMissing('finance_transactions', ['id' => $transactionId]);
+        $this->assertSame('upcoming', $schedule->refresh()->status);
+        $this->assertSame('active', $debt->refresh()->status);
+        $this->assertSame('1000000.00', app(FinanceBalanceService::class)->balance($account));
     }
 
     public function test_receivable_payment_creates_income_and_increases_destination_account(): void
@@ -156,6 +203,63 @@ class FinancePersonalModulesTest extends TestCase
         $this->assertDatabaseHas('finance_savings_monthly_targets', [
             'savings_goal_id' => $goal->id, 'year' => 2026, 'month' => 8, 'target_amount' => '300000.00',
         ]);
+    }
+
+    public function test_admin_can_update_a_savings_goal(): void
+    {
+        $goal = FinanceSavingsGoal::create($this->goalPayload());
+
+        $this->actingAs($this->admin())->put("/admin/finance/savings/{$goal->id}", [
+            ...$this->goalPayload('2000000.00'), 'name' => 'Updated emergency fund',
+        ])->assertRedirect("/admin/finance/savings/{$goal->id}");
+
+        $this->assertDatabaseHas('finance_savings_goals', [
+            'id' => $goal->id, 'name' => 'Updated emergency fund',
+            'target_amount' => '2000000.00',
+        ]);
+    }
+
+    public function test_admin_can_delete_savings_goal_with_entries_and_transactions(): void
+    {
+        $account = $this->account('1000000.00');
+        $goal = FinanceSavingsGoal::create($this->goalPayload());
+
+        $this->actingAs($this->admin())->post("/admin/finance/savings/{$goal->id}/entries", [
+            'type' => 'contribution', 'amount' => '400000.00',
+            'entry_date' => today()->toDateString(), 'account_id' => $account->id,
+        ])->assertRedirect();
+
+        $entry = $goal->entries()->firstOrFail();
+        $transactionId = $entry->finance_transaction_id;
+
+        $this->delete("/admin/finance/savings/{$goal->id}")
+            ->assertRedirect('/admin/finance/savings');
+
+        $this->assertDatabaseMissing('finance_savings_goals', ['id' => $goal->id]);
+        $this->assertDatabaseMissing('finance_savings_entries', ['id' => $entry->id]);
+        $this->assertDatabaseMissing('finance_transactions', ['id' => $transactionId]);
+        $this->assertSame('1000000.00', app(FinanceBalanceService::class)->balance($account));
+    }
+
+    public function test_admin_can_delete_a_transaction_linked_to_a_savings_entry(): void
+    {
+        $account = $this->account('1000000.00');
+        $goal = FinanceSavingsGoal::create($this->goalPayload());
+
+        $this->actingAs($this->admin())->post("/admin/finance/savings/{$goal->id}/entries", [
+            'type' => 'contribution', 'amount' => '400000.00',
+            'entry_date' => today()->toDateString(), 'account_id' => $account->id,
+        ])->assertRedirect();
+
+        $entry = FinanceSavingsEntry::firstOrFail();
+        $transactionId = $entry->finance_transaction_id;
+
+        $this->delete("/admin/finance/transactions/{$transactionId}")->assertRedirect();
+
+        $this->assertDatabaseMissing('finance_savings_entries', ['id' => $entry->id]);
+        $this->assertDatabaseMissing('finance_transactions', ['id' => $transactionId]);
+        $this->assertSame('0.00', $goal->savedAmount());
+        $this->assertSame('1000000.00', app(FinanceBalanceService::class)->balance($account));
     }
 
     public function test_savings_monthly_targets_are_independent_without_carry_over(): void

@@ -61,12 +61,17 @@ class FinanceDebtController extends Controller
 
     public function destroy(FinanceDebt $debt): RedirectResponse
     {
-        $cancelled = $debt->payments()->exists();
-        $cancelled ? $debt->update(['status' => 'cancelled']) : $debt->delete();
+        DB::transaction(function () use ($debt) {
+            $transactionIds = $debt->payments()->pluck('finance_transaction_id');
+
+            $debt->payments()->delete();
+            FinanceTransaction::whereIn('id', $transactionIds)->delete();
+            $debt->delete();
+        });
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $cancelled ? 'Debt or receivable cancelled successfully.' : 'Debt or receivable deleted successfully.',
+            'message' => 'Debt or receivable deleted successfully.',
         ]);
 
         return to_route('admin.finance.debts.index');

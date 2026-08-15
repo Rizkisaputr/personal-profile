@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import ConfirmDelete from '@/components/admin/ConfirmDelete.vue';
 import PageHeader from '@/components/admin/PageHeader.vue';
 import { buttonVariants } from '@/components/ui/button';
 import { formatIDR } from '@/lib/money';
@@ -14,6 +16,15 @@ type G = {
     status: string;
 };
 defineProps<{ goals: G[] }>();
+const deleting = ref<number | null>(null);
+
+function remove(goal: G): void {
+    deleting.value = goal.id;
+    router.delete(`/admin/finance/savings/${goal.id}`, {
+        preserveScroll: true,
+        onFinish: () => (deleting.value = null),
+    });
+}
 </script>
 <template>
     <Head title="Savings" /><PageHeader
@@ -70,12 +81,26 @@ defineProps<{ goals: G[] }>();
                         : '—'
                 }}
             </p>
-            <Link
-                :href="`/admin/finance/savings/${g.id}`"
-                :class="buttonVariants({ variant: 'outline', size: 'sm' })"
-            >
-                Manage Savings
-            </Link>
+            <div class="flex justify-end gap-1">
+                <Link
+                    :href="`/admin/finance/savings/${g.id}`"
+                    :class="buttonVariants({ variant: 'ghost', size: 'sm' })"
+                >
+                    Manage
+                </Link>
+                <Link
+                    :href="`/admin/finance/savings/${g.id}/edit`"
+                    :class="buttonVariants({ variant: 'ghost', size: 'sm' })"
+                >
+                    Edit
+                </Link>
+                <ConfirmDelete
+                    title="Delete savings goal?"
+                    description="This goal, monthly targets, savings history, and related finance transactions will be permanently deleted."
+                    :processing="deleting === g.id"
+                    @confirm="remove(g)"
+                />
+            </div>
         </div>
         <p v-if="!goals.length" class="p-10 text-center text-muted-foreground">
             No savings goals.

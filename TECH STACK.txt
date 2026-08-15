@@ -1,0 +1,52 @@
+PERSONAL PROFILE - TECH STACK
+
+Backend:
+- Laravel 13.x
+- PHP 8.3
+
+Frontend:
+- Vue.js
+- Inertia.js
+- Tailwind CSS
+- Vite
+- Node.js 22.x
+
+Database:
+- TiDB Cloud
+- MySQL Compatible
+
+Container:
+- Docker
+- Docker Compose
+
+Web Server:
+- Nginx
+
+Application Runtime:
+- FrankenPHP
+
+Server:
+- VPS Ubuntu 24.04 LTS
+
+DNS & SSL:
+- Cloudflare
+
+Source Control:
+- Git
+- GitHub
+
+Storage:
+- Docker Volume
+- Laravel Storage
+
+Deployment:
+- Git Pull
+- Docker Build
+- Docker Compose
+
+Architecture:
+Cloudflare
+→ Nginx
+→ Docker
+→ Laravel + FrankenPHP
+→ TiDB Cloud

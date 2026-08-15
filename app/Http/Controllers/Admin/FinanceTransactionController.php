@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreFinanceTransactionRequest;
 use App\Http\Requests\Admin\UpdateFinanceTransactionRequest;
 use App\Models\FinanceAccount;
+use App\Models\FinanceBillPayment;
 use App\Models\FinanceCategory;
+use App\Models\FinanceDebtPayment;
+use App\Models\FinanceSavingsEntry;
 use App\Models\FinanceTransaction;
+use App\Models\SubscriptionPayment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +74,25 @@ class FinanceTransactionController extends Controller
 
     public function destroy(FinanceTransaction $transaction): RedirectResponse
     {
-        DB::transaction(fn () => $transaction->delete());
+        DB::transaction(function () use ($transaction) {
+            $debtPayment = FinanceDebtPayment::with(['debt', 'schedule'])
+                ->where('finance_transaction_id', $transaction->id)
+                ->first();
+
+            $debtPayment?->delete();
+            FinanceSavingsEntry::where('finance_transaction_id', $transaction->id)->delete();
+            FinanceBillPayment::where('finance_transaction_id', $transaction->id)->delete();
+            SubscriptionPayment::where('finance_transaction_id', $transaction->id)->delete();
+            $transaction->delete();
+
+            if ($debtPayment?->schedule) {
+                $debtPayment->schedule->update(['status' => 'upcoming']);
+            }
+
+            if ($debtPayment?->debt?->status === 'paid') {
+                $debtPayment->debt->update(['status' => 'active']);
+            }
+        });
         Inertia::flash('toast', ['type' => 'success', 'message' => 'Transaction deleted.']);
 
         return back();

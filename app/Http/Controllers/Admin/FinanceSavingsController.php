@@ -60,12 +60,17 @@ class FinanceSavingsController extends Controller
 
     public function destroy(FinanceSavingsGoal $saving): RedirectResponse
     {
-        $cancelled = $saving->entries()->exists();
-        $cancelled ? $saving->update(['status' => 'cancelled']) : $saving->delete();
+        DB::transaction(function () use ($saving) {
+            $transactionIds = $saving->entries()->pluck('finance_transaction_id');
+
+            $saving->entries()->delete();
+            FinanceTransaction::whereIn('id', $transactionIds)->delete();
+            $saving->delete();
+        });
 
         Inertia::flash('toast', [
             'type' => 'success',
-            'message' => $cancelled ? 'Savings goal cancelled successfully.' : 'Savings goal deleted successfully.',
+            'message' => 'Savings goal deleted successfully.',
         ]);
 
         return to_route('admin.finance.savings.index');
