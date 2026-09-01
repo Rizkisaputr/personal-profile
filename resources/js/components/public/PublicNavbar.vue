@@ -27,7 +27,7 @@ const name = computed(
         settings.value.website_title ||
         'Personal Profile',
 );
-const sidebarQuote = '“What you\'re not changing, you\'re choosing.”';
+const sidebarQuote = "“What you're not changing, you're choosing.”";
 const initials = computed(() =>
     name.value
         .split(/\s+/)

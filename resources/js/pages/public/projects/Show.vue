@@ -51,9 +51,7 @@ const year = (date: string | null): string =>
     <SeoHead :seo="seo" :browser-title="project.title" type="article" />
 
     <article>
-        <header
-            class="content-container py-14 sm:py-16 lg:py-20"
-        >
+        <header class="content-container py-14 sm:py-16 lg:py-20">
             <MotionReveal
                 ><Link
                     href="/projects"

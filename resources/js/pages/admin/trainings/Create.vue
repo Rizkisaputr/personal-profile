@@ -6,6 +6,10 @@ import TrainingForm from './TrainingForm.vue';
 
 <template>
     <Head title="Add Training" />
-    <PageHeader eyebrow="Training & Courses" title="Add training" description="Add a course, workshop, bootcamp, or professional development program." />
+    <PageHeader
+        eyebrow="Training & Courses"
+        title="Add training"
+        description="Add a course, workshop, bootcamp, or professional development program."
+    />
     <TrainingForm />
 </template>

@@ -14,7 +14,7 @@ class DashboardNotificationDummySeederTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_seeder_is_idempotent_and_supplies_dashboard_alerts(): void
+    public function test_seeder_is_idempotent_and_dashboard_omits_due_bill_alerts(): void
     {
         $this->seed(DashboardNotificationDummySeeder::class);
         $this->seed(DashboardNotificationDummySeeder::class);
@@ -26,11 +26,8 @@ class DashboardNotificationDummySeederTest extends TestCase
         $admin = User::factory()->create(['is_admin' => true]);
 
         $this->actingAs($admin)->get('/admin')->assertInertia(fn (Assert $page) => $page
-            ->where('alerts.0.title', 'Internet Rumah')
-            ->where('alerts.0.days', -2)
-            ->where('alerts.0.severity', 'urgent')
-            ->where('alerts.1.title', 'Shopee PayLater')
-            ->where('alerts.1.days', 5)
-            ->where('alerts.1.severity', 'warning'));
+            ->where('debtSummary.items.0.name', 'Shopee PayLater')
+            ->missing('alerts')
+            ->missing('upcomingPayments'));
     }
 }

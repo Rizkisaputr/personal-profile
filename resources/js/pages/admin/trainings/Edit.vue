@@ -9,6 +9,10 @@ defineProps<{ training: Training }>();
 
 <template>
     <Head title="Edit Training" />
-    <PageHeader eyebrow="Training & Courses" title="Edit training" description="Keep program, institution, and timeline details accurate." />
+    <PageHeader
+        eyebrow="Training & Courses"
+        title="Edit training"
+        description="Keep program, institution, and timeline details accurate."
+    />
     <TrainingForm :training="training" />
 </template>

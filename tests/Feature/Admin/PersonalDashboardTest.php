@@ -2,17 +2,14 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Models\Document;
 use App\Models\FinanceAccount;
 use App\Models\FinanceCategory;
 use App\Models\FinanceDebt;
-use App\Models\FinanceRecurringBill;
 use App\Models\FinanceSavingsEntry;
 use App\Models\FinanceSavingsGoal;
 use App\Models\FinanceSavingsMonthlyTarget;
 use App\Models\FinanceTransaction;
 use App\Models\Project;
-use App\Models\Subscription;
 use App\Models\User;
 use Database\Seeders\FinanceCategorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,11 +45,15 @@ class PersonalDashboardTest extends TestCase
         FinanceTransaction::create(['type' => 'transfer', 'transaction_date' => today(), 'amount' => '50000.00', 'from_account_id' => $main->id, 'to_account_id' => $cash->id]);
 
         $this->actingAs($this->admin())->get('/admin')->assertInertia(fn (Assert $page) => $page
-            ->where('financeSummary.total_balance', '1275000.00')
-            ->where('financeSummary.income', '300000.00')
-            ->where('financeSummary.expense', '125000.00')
-            ->where('cashFlow.5.income', '300000.00')
-            ->where('cashFlow.5.expense', '125000.00'));
+            ->where('financialSummary.total_balance', '1275000.00')
+            ->where('financialSummary.income', '300000')
+            ->where('financialSummary.expense', '125000')
+            ->where('financialSummary.net_cash_flow', '175000.00')
+            ->where('financeTrend.0.income', '0.00')
+            ->where('financeTrend.5.income', '300000')
+            ->where('financeTrend.5.expense', '125000')
+            ->where('expenseByCategory.0.category', $expenseCategory->name)
+            ->where('expenseByCategory.0.amount', '125000'));
     }
 
     public function test_dashboard_exposes_savings_progress_and_previous_shortfall_without_carry_over(): void
@@ -65,32 +66,26 @@ class PersonalDashboardTest extends TestCase
         $this->savingEntry($goal, $account, '150000.00', '2026-08-05');
 
         $this->actingAs($this->admin())->get('/admin')->assertInertia(fn (Assert $page) => $page
-            ->where('financeSummary.savings', '550000.00')
+            ->where('financialSummary.savings', '550000.00')
             ->where('savingsGoals.0.progress', 55)
-            ->where('savingsGoals.0.month.target', '300000.00')
-            ->where('savingsGoals.0.month.actual', '150000.00')
-            ->where('savingsGoals.0.previous_month.shortfall', '100000.00'));
+            ->where('savingsGoals.0.saved', '550000.00')
+            ->where('savingsGoals.0.target', '1000000.00'));
     }
 
-    public function test_dashboard_builds_dynamic_due_and_expiry_alerts(): void
+    public function test_dashboard_exposes_active_debt_without_due_bill_data(): void
     {
         $debt = FinanceDebt::create(['name' => 'Shopee PayLater', 'type' => 'debt', 'original_amount' => '750000.00', 'status' => 'active']);
-        $debt->schedules()->create(['due_date' => today()->addDays(7), 'amount' => '750000.00', 'status' => 'upcoming']);
-        $overdue = FinanceDebt::create(['name' => 'Overdue Loan', 'type' => 'debt', 'original_amount' => '100000.00', 'status' => 'active']);
-        $overdue->schedules()->create(['due_date' => today()->subDays(2), 'amount' => '100000.00', 'status' => 'upcoming']);
-        $paid = FinanceDebt::create(['name' => 'Paid Loan', 'type' => 'debt', 'original_amount' => '100000.00', 'status' => 'paid']);
-        $paid->schedules()->create(['due_date' => today(), 'amount' => '100000.00', 'status' => 'upcoming']);
-        FinanceRecurringBill::create(['name' => 'Internet', 'amount' => '300000.00', 'frequency' => 'monthly', 'next_due_date' => today()->addDays(12), 'is_active' => true]);
-        Subscription::create(['service_name' => 'AWS', 'cost' => '320000.00', 'billing_cycle' => 'monthly', 'next_renewal_date' => today()->addDays(3), 'is_active' => true]);
-        Document::create(['name' => 'SIM A', 'category' => 'Identity', 'expiry_date' => today()->addDays(24), 'is_active' => true]);
+        $account = $this->account();
+        $transaction = FinanceTransaction::create(['type' => 'adjustment', 'transaction_date' => today(), 'amount' => '250000.00', 'account_id' => $account->id, 'adjustment_direction' => 'decrease']);
+        $debt->payments()->create(['payment_date' => today(), 'amount' => '250000.00', 'finance_transaction_id' => $transaction->id]);
 
         $this->actingAs($this->admin())->get('/admin')->assertInertia(fn (Assert $page) => $page
-            ->has('alerts', 5)
-            ->where('alerts.0.title', 'Overdue Loan')->where('alerts.0.severity', 'urgent')
-            ->where('alerts.1.title', 'AWS')->where('alerts.1.severity', 'warning')
-            ->where('alerts.2.title', 'Shopee PayLater')->where('alerts.2.severity', 'warning')
-            ->where('alerts.3.title', 'Internet')->where('alerts.3.severity', 'info')
-            ->where('alerts.4.title', 'SIM A')->where('alerts.4.severity', 'info'));
+            ->where('financialSummary.remaining_debt', '500000.00')
+            ->where('debtSummary.total', '500000.00')
+            ->where('debtSummary.items.0.name', 'Shopee PayLater')
+            ->where('debtSummary.items.0.remaining', '500000.00')
+            ->missing('alerts')
+            ->missing('upcomingPayments'));
     }
 
     public function test_dashboard_project_counts_use_work_status(): void
@@ -100,7 +95,9 @@ class PersonalDashboardTest extends TestCase
         }
 
         $this->actingAs($this->admin())->get('/admin')->assertInertia(fn (Assert $page) => $page
-            ->where('portfolioSummary', ['total' => 5, 'waiting' => 1, 'running' => 1, 'on_hold' => 1, 'done' => 2]));
+            ->where('projectSummary', ['total' => 5, 'waiting' => 1, 'running' => 1, 'on_hold' => 1, 'done' => 2])
+            ->has('recentProjects', 5)
+            ->where('recentProjects.0.title', 'Project 4'));
     }
 
     public function test_non_admin_cannot_access_personal_control_center(): void

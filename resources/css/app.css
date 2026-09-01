@@ -159,8 +159,7 @@
 
     .admin-shell table tbody tr {
         background: var(--card);
-        transition: background-color var(--duration-fast)
-            var(--ease-interface);
+        transition: background-color var(--duration-fast) var(--ease-interface);
     }
 
     .admin-shell table tbody tr:hover {
@@ -290,7 +289,9 @@
 }
 
 @media (min-width: 768px) {
-    .content-container { width: min(100% - 3rem, 68rem); }
+    .content-container {
+        width: min(100% - 3rem, 68rem);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

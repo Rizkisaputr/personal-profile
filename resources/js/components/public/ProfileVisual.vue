@@ -47,7 +47,10 @@ const initials = computed(() =>
                 <p
                     class="mt-5 max-w-[13rem] text-sm leading-6 text-muted-foreground"
                 >
-                    {{ name }}<template v-if="professionalTitle"><br />{{ professionalTitle }}</template>
+                    {{ name
+                    }}<template v-if="professionalTitle"
+                        ><br />{{ professionalTitle }}</template
+                    >
                 </p>
             </div>
         </div>

@@ -126,8 +126,8 @@ class PersonalDevelopmentSeeder extends Seeder
 
         $this->savingEntry($emergency, $accounts['BCA'], '10750000.00', today()->subMonths(2), 'Development Dana Darurat opening contributions');
         $this->savingEntry($emergency, $accounts['BCA'], '4000000.00', $previous->copy()->day(12), 'Development Dana Darurat previous month');
-        $this->savingEntry($emergency, $accounts['BCA'], '3250000.00', today()->subDays(3), 'Development Dana Darurat current month');
-        $this->savingEntry($upgrade, $accounts['BRI'], '5000000.00', today()->subDays(5), 'Development Upgrade Laptop contribution');
+        $this->savingEntry($emergency, $accounts['BCA'], '3250000.00', today(), 'Development Dana Darurat current month');
+        $this->savingEntry($upgrade, $accounts['BRI'], '5000000.00', today(), 'Development Upgrade Laptop contribution');
     }
 
     private function savingEntry(FinanceSavingsGoal $goal, FinanceAccount $account, string $amount, $date, string $description): void

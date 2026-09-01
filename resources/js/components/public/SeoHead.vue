@@ -35,11 +35,7 @@ const favicon = computed(
             property="og:description"
             :content="seo.description"
         />
-        <meta
-            head-key="og:type"
-            property="og:type"
-            :content="type"
-        />
+        <meta head-key="og:type" property="og:type" :content="type" />
         <meta head-key="og:url" property="og:url" :content="seo.canonical" />
         <meta
             v-if="seo.image"

@@ -1,6 +1,10 @@
 const translations: Record<string, string> = {
     Overview: 'Ringkasan',
     Dashboard: 'Dasboard',
+    Main: 'Utama',
+    'Personal Workspace': 'Ruang Kerja Personal',
+    'Admin Workspace': 'Ruang Kerja Admin',
+    'Finance Menu': 'Menu Keuangan',
     Personal: 'Pribadi',
     Workspace: 'Portofolio',
     Finance: 'Keuangan',
@@ -63,6 +67,42 @@ const translations: Record<string, string> = {
     'Income This Month': 'Pemasukan Bulan Ini',
     'Expense This Month': 'Pengeluaran Bulan Ini',
     'Remaining Debt': 'Sisa Hutang',
+    'Financial Overview': 'Ringkasan Keuangan',
+    'Personal Finance': 'Keuangan Personal',
+    'Income vs Expense': 'Pemasukan vs Pengeluaran',
+    'Last 6 months · transfers excluded':
+        '6 bulan terakhir · transfer tidak dihitung',
+    'Spending by Category': 'Pengeluaran per Kategori',
+    'Total spent': 'Total pengeluaran',
+    Liabilities: 'Kewajiban',
+    'Portfolio Overview': 'Ringkasan Portofolio',
+    'Waiting / On Hold': 'Menunggu / Ditunda',
+    'Recent Projects': 'Proyek Terbaru',
+    'View all projects': 'Lihat semua proyek',
+    'View all transactions': 'Lihat semua transaksi',
+    'View finance': 'Lihat keuangan',
+    remaining: 'tersisa',
+    'No transactions this month.': 'Belum ada transaksi bulan ini.',
+    'Your six-month trend will appear here.':
+        'Tren enam bulan Anda akan tampil di sini.',
+    'No expenses this month.': 'Belum ada pengeluaran bulan ini.',
+    'Category insights will appear after a transaction.':
+        'Ringkasan kategori akan tampil setelah ada transaksi.',
+    'No savings goals yet.': 'Belum ada target tabungan.',
+    'Create a goal to track your progress.':
+        'Buat target untuk memantau progres Anda.',
+    'No active debt.': 'Tidak ada hutang aktif.',
+    'Your active debt summary will appear here.':
+        'Ringkasan hutang aktif akan tampil di sini.',
+    'No projects yet.': 'Belum ada proyek.',
+    'New portfolio work will appear here.':
+        'Proyek portofolio baru akan tampil di sini.',
+    'Your latest finance activity will appear here.':
+        'Aktivitas keuangan terbaru akan tampil di sini.',
+    Today: 'Hari ini',
+    Yesterday: 'Kemarin',
+    'No technology': 'Belum ada teknologi',
+    'Account transfer': 'Transfer rekening',
     'Financial summary': 'Ringkasan keuangan',
     'Finance overview': 'Ringkasan Keuangan',
     'Finance accounts': 'Rekening Keuangan',

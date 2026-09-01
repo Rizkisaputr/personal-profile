@@ -61,20 +61,20 @@ class PersonalDevelopmentSeederTest extends TestCase
         $this->assertSame('1000000.00', $emergency->previousMonthShortfall()['shortfall']);
     }
 
-    public function test_seeded_dashboard_has_chart_alert_and_activity_data(): void
+    public function test_seeded_dashboard_has_chart_and_activity_data(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
 
         $this->actingAs($admin)->get('/admin')->assertInertia(fn (Assert $page) => $page
             ->component('admin/Index')
-            ->has('cashFlow', 6)
-            ->where('cashFlow.5.income', fn ($value) => (float) $value > 0)
-            ->where('cashFlow.5.expense', fn ($value) => (float) $value > 0)
-            ->has('expenseBreakdown')
-            ->has('alerts', fn (Assert $alerts) => $alerts
-                ->where('0.severity', 'urgent')->etc())
-            ->has('recentTransactions', 8)
-            ->has('upcomingPayments'));
+            ->has('financeTrend', 6)
+            ->where('financeTrend.5.income', fn ($value) => (float) $value > 0)
+            ->where('financeTrend.5.expense', fn ($value) => (float) $value > 0)
+            ->has('expenseByCategory')
+            ->has('recentTransactions', 6)
+            ->has('recentProjects')
+            ->missing('alerts')
+            ->missing('upcomingPayments'));
     }
 
     public function test_seed_distributes_project_work_status_without_changing_visibility(): void

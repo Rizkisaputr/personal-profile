@@ -2,7 +2,11 @@ export function formatIDR(value: string | number): string {
     const cents = toCents(String(value));
     const roundedRupiah = (cents < 0n ? cents - 50n : cents + 50n) / 100n;
 
-    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(roundedRupiah);
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        maximumFractionDigits: 0,
+    }).format(roundedRupiah);
 }
 
 export function moneyDifference(left: string, right: string): string {
@@ -16,8 +20,12 @@ export function moneyDifference(left: string, right: string): string {
 function toCents(value: string): bigint {
     const trimmed = value.trim();
     const negative = trimmed.startsWith('-');
-    const [whole = '0', fraction = ''] = trimmed.replace(/^[+-]/, '').split('.');
-    const cents = BigInt(whole || '0') * 100n + BigInt(fraction.slice(0, 2).padEnd(2, '0') || '0');
+    const [whole = '0', fraction = ''] = trimmed
+        .replace(/^[+-]/, '')
+        .split('.');
+    const cents =
+        BigInt(whole || '0') * 100n +
+        BigInt(fraction.slice(0, 2).padEnd(2, '0') || '0');
 
     return negative ? -cents : cents;
 }

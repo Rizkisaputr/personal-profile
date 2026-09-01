@@ -45,7 +45,9 @@ const visibleProjects = computed(() =>
         >
     </header>
 
-    <section class="border-t border-border bg-background-warm py-10 sm:py-12 lg:py-14">
+    <section
+        class="border-t border-border bg-background-warm py-10 sm:py-12 lg:py-14"
+    >
         <div class="content-container">
             <div
                 v-if="categories.length > 1"

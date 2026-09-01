@@ -29,7 +29,8 @@ const remainingTechnologies = (project: PublicProject): number =>
                     {{ project.title }}
                 </h3>
                 <p class="mt-1 text-xs text-muted-foreground">
-                    {{ project.category }}<template
+                    {{ project.category
+                    }}<template
                         v-if="project.category && year(project.project_date)"
                     >
                         · </template
